@@ -1,0 +1,72 @@
+[
+  {
+    "id": 7020290,
+    "name": "Smriti Bhattathiri PhD",
+    "email": "bhattathiri_phd_smriti@terry-cartwright.test",
+    "gender": "female",
+    "status": "inactive"
+  },
+  {
+    "id": 7020289,
+    "name": "Gurdev Namboothiri",
+    "email": "gurdev_namboothiri@tremblay-buckridge.example",
+    "gender": "female",
+    "status": "inactive"
+  },
+  {
+    "id": 7020288,
+    "name": "Veda Acharya Esq.",
+    "email": "veda_acharya_esq@krajcik.test",
+    "gender": "male",
+    "status": "inactive"
+  },
+  {
+    "id": 7020287,
+    "name": "Gandharv Ahluwalia",
+    "email": "gandharv_ahluwalia@huels.example",
+    "gender": "female",
+    "status": "active"
+  },
+  {
+    "id": 7020286,
+    "name": "Devvrat Achari",
+    "email": "devvrat_achari@greenholt.test",
+    "gender": "male",
+    "status": "active"
+  },
+  {
+    "id": 7020285,
+    "name": "Diptendu Mahajan",
+    "email": "mahajan_diptendu@willms.test",
+    "gender": "female",
+    "status": "active"
+  },
+  {
+    "id": 7020284,
+    "name": "Chandraketu Sharma",
+    "email": "sharma_chandraketu@walter-fahey.test",
+    "gender": "female",
+    "status": "active"
+  },
+  {
+    "id": 7020283,
+    "name": "Chakradhar Khanna LLD",
+    "email": "chakradhar_lld_khanna@mcdermott.test",
+    "gender": "male",
+    "status": "active"
+  },
+  {
+    "id": 7020282,
+    "name": "Bhaasvan Jha",
+    "email": "bhaasvan_jha@steuber-wolf.example",
+    "gender": "male",
+    "status": "active"
+  },
+  {
+    "id": 7020281,
+    "name": "Chaanakya Menon",
+    "email": "chaanakya_menon@mcclure.example",
+    "gender": "male",
+    "status": "active"
+  }
+]

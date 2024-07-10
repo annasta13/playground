@@ -1,6 +1,11 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -18,10 +23,22 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildConfigField("String", "ACCESS_TOKEN", readProperties("ACCESS_TOKEN"))
+    }
+
+    ksp {
+        arg("room.schemaLocation", "$projectDir/app/src/schemas")
     }
 
     buildTypes {
         release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -38,9 +55,7 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        buildConfig = true
     }
     packaging {
         resources {
@@ -59,6 +74,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.paging.compose.android)
+    implementation(libs.androidx.constraintlayout.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -66,4 +83,39 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.hilt.work)
+    ksp(libs.hilt.work.compiler)
+    implementation(libs.hilt)
+    testImplementation(libs.hilt.testing)
+    ksp(libs.hilt.compiler)
+
+    implementation(libs.room.ktx)
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
+    androidTestImplementation(libs.room.testing)
+
+    implementation(libs.timber)
+    implementation(libs.compose.coil)
+    implementation(libs.compose.navigation)
+    implementation(libs.compose.hilt.navigation)
+    implementation(libs.converter.moshi)
+    implementation(libs.accompanist.swiperefresh)
+
+    implementation(libs.androidx.work.runtime)
+    implementation(libs.androidx.core.splashscreen)
+
+    testImplementation(libs.test.mockk)
+    testImplementation(libs.test.truth)
+    testImplementation(libs.test.coroutine)
+    testImplementation(libs.test.pagination)
+}
+
+fun readProperties(key: String): String {
+    val properties = Properties().apply {
+        file("${rootDir}/local.properties").inputStream().use { fis ->
+            load(fis)
+        }
+    }
+    return properties[key] as String
 }

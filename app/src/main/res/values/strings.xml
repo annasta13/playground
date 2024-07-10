@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Playground</string>
+    <string name="topics">Topics</string>
+    <string name="search">Search</string>
+    <string name="search_demo_title">Search Demo</string>
+    <string name="heart_beat_animation">Heart Beat Animation</string>
+    <string name="content_description_heart_beat">Heart Beat</string>
+    <string name="product_list">Product List</string>
+    <string name="product_detail">Product Detail</string>
+    <string name="label_amount">%s | Amount: %d</string>
+    <string name="label_stock">Stock: %d</string>
+    <string name="select_heart_beat">Select Heart Beat per Minute</string>
+    <string name="heart_beat">Heart Beat</string>
+    <string name="users">Users</string>
+    <string name="data_not_found">Data not found</string>
+    <string name="retry">Retry</string>
+    <string name="loading_data">Loading data</string>
+    <string name="add_user">Add User</string>
+    <string name="add_transaction">Add Transaction</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="gender">Gender</string>
+    <string name="save">Save</string>
+    <string name="amount">Amount</string>
+    <string name="transaction_type">Transaction Type</string>
+    <string name="date">Date</string>
+    <string name="select_gender">Select Gender</string>
+    <string name="select_transaction_type">Select Transaction Type</string>
 </resources>

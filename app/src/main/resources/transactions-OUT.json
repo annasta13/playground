@@ -1,0 +1,602 @@
+[
+  {
+    "type": "OUT",
+    "product_id": 1,
+    "amount": 24,
+    "timestamp": "1719775858000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 2,
+    "amount": 31,
+    "timestamp": "1720521234000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 3,
+    "amount": 48,
+    "timestamp": "1718051542000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 4,
+    "amount": 43,
+    "timestamp": "1720208399000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 5,
+    "amount": 16,
+    "timestamp": "1719654107000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 6,
+    "amount": 23,
+    "timestamp": "1718325474000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 7,
+    "amount": 24,
+    "timestamp": "1719983972000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 8,
+    "amount": 16,
+    "timestamp": "1719227438000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 9,
+    "amount": 24,
+    "timestamp": "1717979691000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 10,
+    "amount": 33,
+    "timestamp": "1718799431000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 11,
+    "amount": 49,
+    "timestamp": "1717996891000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 12,
+    "amount": 44,
+    "timestamp": "1718771338000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 13,
+    "amount": 35,
+    "timestamp": "1719050458000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 14,
+    "amount": 28,
+    "timestamp": "1719956564000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 15,
+    "amount": 46,
+    "timestamp": "1718066647000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 16,
+    "amount": 36,
+    "timestamp": "1718113781000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 17,
+    "amount": 41,
+    "timestamp": "1720365942000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 18,
+    "amount": 39,
+    "timestamp": "1718415422000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 19,
+    "amount": 48,
+    "timestamp": "1718112428000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 20,
+    "amount": 10,
+    "timestamp": "1719524048000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 21,
+    "amount": 41,
+    "timestamp": "1718431224000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 22,
+    "amount": 34,
+    "timestamp": "1719210465000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 23,
+    "amount": 10,
+    "timestamp": "1720134709000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 24,
+    "amount": 20,
+    "timestamp": "1718760295000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 25,
+    "amount": 37,
+    "timestamp": "1719219423000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 26,
+    "amount": 25,
+    "timestamp": "1718235300000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 27,
+    "amount": 18,
+    "timestamp": "1719078494000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 28,
+    "amount": 23,
+    "timestamp": "1718522471000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 29,
+    "amount": 36,
+    "timestamp": "1718700457000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 30,
+    "amount": 28,
+    "timestamp": "1719514200000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 31,
+    "amount": 14,
+    "timestamp": "1720363590000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 32,
+    "amount": 44,
+    "timestamp": "1720547289000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 33,
+    "amount": 10,
+    "timestamp": "1718721585000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 34,
+    "amount": 14,
+    "timestamp": "1719835601000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 35,
+    "amount": 12,
+    "timestamp": "1718175897000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 36,
+    "amount": 46,
+    "timestamp": "1720402004000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 37,
+    "amount": 30,
+    "timestamp": "1719233358000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 38,
+    "amount": 26,
+    "timestamp": "1720422568000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 39,
+    "amount": 10,
+    "timestamp": "1720229562000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 40,
+    "amount": 23,
+    "timestamp": "1718588035000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 41,
+    "amount": 16,
+    "timestamp": "1718520738000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 42,
+    "amount": 14,
+    "timestamp": "1718379483000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 43,
+    "amount": 14,
+    "timestamp": "1719176647000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 44,
+    "amount": 31,
+    "timestamp": "1718970098000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 45,
+    "amount": 25,
+    "timestamp": "1718565662000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 46,
+    "amount": 34,
+    "timestamp": "1718073713000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 47,
+    "amount": 44,
+    "timestamp": "1718768106000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 48,
+    "amount": 19,
+    "timestamp": "1719994833000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 49,
+    "amount": 28,
+    "timestamp": "1719941449000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 50,
+    "amount": 34,
+    "timestamp": "1719273616000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 1,
+    "amount": 18,
+    "timestamp": "1718158270000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 2,
+    "amount": 27,
+    "timestamp": "1719816173000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 3,
+    "amount": 48,
+    "timestamp": "1718437604000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 4,
+    "amount": 20,
+    "timestamp": "1720343495000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 5,
+    "amount": 36,
+    "timestamp": "1719203325000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 6,
+    "amount": 14,
+    "timestamp": "1718000533000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 7,
+    "amount": 34,
+    "timestamp": "1720231350000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 8,
+    "amount": 41,
+    "timestamp": "1719474438000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 9,
+    "amount": 12,
+    "timestamp": "1720552378000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 10,
+    "amount": 41,
+    "timestamp": "1718679678000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 11,
+    "amount": 24,
+    "timestamp": "1718687326000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 12,
+    "amount": 35,
+    "timestamp": "1718266379000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 13,
+    "amount": 13,
+    "timestamp": "1718632404000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 14,
+    "amount": 48,
+    "timestamp": "1720056866000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 15,
+    "amount": 22,
+    "timestamp": "1718807298000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 16,
+    "amount": 35,
+    "timestamp": "1719351219000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 17,
+    "amount": 15,
+    "timestamp": "1718654951000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 18,
+    "amount": 15,
+    "timestamp": "1720539968000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 19,
+    "amount": 25,
+    "timestamp": "1718836469000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 20,
+    "amount": 47,
+    "timestamp": "1719729067000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 21,
+    "amount": 32,
+    "timestamp": "1719336778000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 22,
+    "amount": 37,
+    "timestamp": "1720016754000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 23,
+    "amount": 11,
+    "timestamp": "1720157903000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 24,
+    "amount": 38,
+    "timestamp": "1719550980000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 25,
+    "amount": 46,
+    "timestamp": "1718384587000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 26,
+    "amount": 29,
+    "timestamp": "1720228191000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 27,
+    "amount": 33,
+    "timestamp": "1720403187000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 28,
+    "amount": 31,
+    "timestamp": "1720329684000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 29,
+    "amount": 47,
+    "timestamp": "1719122790000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 30,
+    "amount": 37,
+    "timestamp": "1720375451000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 31,
+    "amount": 28,
+    "timestamp": "1718119134000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 32,
+    "amount": 37,
+    "timestamp": "1718183692000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 33,
+    "amount": 44,
+    "timestamp": "1718476080000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 34,
+    "amount": 31,
+    "timestamp": "1719784420000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 35,
+    "amount": 41,
+    "timestamp": "1718568501000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 36,
+    "amount": 33,
+    "timestamp": "1720120419000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 37,
+    "amount": 34,
+    "timestamp": "1718082567000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 38,
+    "amount": 33,
+    "timestamp": "1718332797000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 39,
+    "amount": 23,
+    "timestamp": "1719981306000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 40,
+    "amount": 23,
+    "timestamp": "1719285682000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 41,
+    "amount": 13,
+    "timestamp": "1720280370000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 42,
+    "amount": 35,
+    "timestamp": "1720275657000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 43,
+    "amount": 26,
+    "timestamp": "1719472187000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 44,
+    "amount": 14,
+    "timestamp": "1718956674000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 45,
+    "amount": 41,
+    "timestamp": "1718656889000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 46,
+    "amount": 35,
+    "timestamp": "1718362114000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 47,
+    "amount": 50,
+    "timestamp": "1719234167000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 48,
+    "amount": 23,
+    "timestamp": "1720440370000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 49,
+    "amount": 16,
+    "timestamp": "1719056215000"
+  },
+  {
+    "type": "OUT",
+    "product_id": 50,
+    "amount": 49,
+    "timestamp": "1719645863000"
+  }
+]
