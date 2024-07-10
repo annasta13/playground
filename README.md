@@ -31,7 +31,21 @@ Playground: Clean Architecture Android App
 - Pagination
 - Room Database
 
+## Cloning and Running
+### Prerequisites
+1. [Android Studio][2] - min: Iguana
+2. [Android 7 Device][3] - API Level 24 / Nougat
+
+### Gradle Configuration
+Gradle synchronization needs adjustment from local.properties. To synchronize gradle successfully, login to [Go Rest][1] and generate the access token. 
+Then, add the access token to `local.properties` file as shown below.
+```agsl
+ACCESS_TOKEN="c8abb81c572e6c3xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+
 ## Credits
 - [Go Rest][1] - API Provider.
 
 [1]: https://gorest.co.in/
+[2]: https://developer.android.com/studio/
+[3]: https://developer.android.com/tools/releases/platforms#7.0
