@@ -2,9 +2,9 @@ name: Android CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master","develop" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master","develop" ]
   workflow_dispatch:
 
 jobs:
@@ -21,6 +21,8 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
+      - name: Exporting local properties
+        run: echo ACCESS_TOKEN=\"${{secrets.ACCESS_TOKEN}}\" > ./local.properties
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
