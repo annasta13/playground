@@ -22,7 +22,7 @@ Playground: Clean Architecture Android App
 ## Preview
 | Word search | Data Processing | Animation | API Fetching |
 | --- | --- | --- | --- |
-| <img src="https://raw.githubusercontent.com/annasta13/playground/master/search-preview.gif" width=200/> | <img src="https://raw.githubusercontent.com/annasta13/playground/master/data-processing-preview.gif" width=200/> | <img src="https://raw.githubusercontent.com/annasta13/playground/master/heart-beat-animation-preview.gif" width=200/> | <img src="https://raw.githubusercontent.com/annasta13/playground/master/api-fetching-preview.gif" width=200/> | 
+| <img src="https://raw.githubusercontent.com/annasta13/playground/master/screenshots/search-preview.gif" width=200/> | <img src="https://raw.githubusercontent.com/annasta13/playground/master/screenshots/data-processing-preview.gif" width=200/> | <img src="https://raw.githubusercontent.com/annasta13/playground/master/screenshots/heart-beat-animation-preview.gif" width=200/> | <img src="https://raw.githubusercontent.com/annasta13/playground/master/screenshots/api-fetching-preview.gif" width=200/> | 
 
 ## Libraries
 - Jetpack Compose
