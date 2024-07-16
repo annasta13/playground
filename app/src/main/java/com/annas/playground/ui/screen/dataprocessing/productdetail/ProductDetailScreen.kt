@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.annas.playground.R
+import com.annas.playground.constants.FloatConstant
 import com.annas.playground.constants.StringConstant
 import com.annas.playground.constants.StringConstant.SELLING
 import com.annas.playground.data.domain.model.ProductDetail
@@ -51,9 +52,6 @@ import com.annas.playground.ui.graph.onRefresh
 import com.annas.playground.ui.theme.LargePadding
 import com.annas.playground.ui.theme.MediumPadding
 import com.annas.playground.ui.theme.PlaygroundTheme
-import com.annas.playground.ui.theme.Purple40
-import com.annas.playground.ui.theme.Purple80
-import com.annas.playground.ui.theme.PurpleGrey40
 import com.annas.playground.ui.theme.SmallPadding
 import com.annas.playground.utils.LongExtension.toDateString
 import com.annas.playground.utils.StringExtension.toMilliseconds
@@ -114,7 +112,8 @@ private fun ProductDetailContent(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             val typeLabel = if (it.type == IN) StringConstant.STOCKING else SELLING
-                            val rotation = if (it.type == IN) 180f else 0f
+                            val rotation =
+                                if (it.type == IN) FloatConstant.ONE_HUNDRED_AND_EIGHTY else 0f
                             val color = if (it.type == IN) MaterialTheme.colorScheme.outline
                             else Color.Magenta
                             Column {

@@ -6,7 +6,6 @@ import com.annas.playground.data.remote.builder.ApiService
 import com.annas.playground.data.remote.model.UserRequest
 import com.annas.playground.data.remote.model.asUserDomain
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -18,7 +17,6 @@ class UserRepositoryImpl(
 ) : UserRepository {
     override suspend fun getUser(page: Int): Result<PagingResponse<User>> {
         return kotlin.runCatching {
-            delay(2000)
             val response = service.getUser(page)
             val pageSize = response.headers()["x-pagination-pages"]?.toIntOrNull() ?: 1
             val result = PagingResponse(pageSize = pageSize, items = response.body().asUserDomain())

@@ -5,9 +5,18 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.kotlin.kapt) apply false
     alias(libs.plugins.kotlin.ksp) apply false
+    alias(libs.plugins.detekt)
 }
 
 tasks.register("generateEventResource") {
     group = "resource generator"
     createEventResource()
+}
+
+allprojects {
+    apply(plugin = "io.gitlab.arturbosch.detekt")
+    detekt {
+        config.setFrom(file("$rootDir/detekt/compose-detekt-rule.yml"))
+        buildUponDefaultConfig = true
+    }
 }

@@ -39,6 +39,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.annas.playground.R
+import com.annas.playground.constants.FloatConstant
+import com.annas.playground.constants.IntConstant
+import com.annas.playground.constants.IntConstant.SIXTY
 import com.annas.playground.ui.components.BodyText
 import com.annas.playground.ui.components.ScreenContainer
 import com.annas.playground.ui.components.ThemePreviewParameterProvider
@@ -55,15 +58,15 @@ fun AnimationScreen(onNavigateUp: () -> Unit) {
         onLeadingIconClicked = onNavigateUp
     ) {
 
-        val scaleFactor = remember { Animatable(0.6f) }
+        val scaleFactor = remember { Animatable(FloatConstant.ZERO_SIX) }
         var count by remember { mutableIntStateOf(1) }
-        var heartBitPerMinute by remember { mutableIntStateOf(60) }
+        var heartBitPerMinute by remember { mutableIntStateOf(IntConstant.SIX) }
 
         LaunchedEffect(key1 = Unit) {
             while (true) {
-                val duration = 1000 / heartBitPerMinute * 60
+                val duration = IntConstant.ONE_THOUSAND / heartBitPerMinute * SIXTY
                 scaleFactor.animateTo(
-                    0.5f,
+                    FloatConstant.ZERO_FIVE,
                     tween(
                         easing = FastOutSlowInEasing,
                         durationMillis = duration.div(count)
@@ -71,7 +74,7 @@ fun AnimationScreen(onNavigateUp: () -> Unit) {
                 )
                 count++
                 scaleFactor.animateTo(
-                    0.6f,
+                    FloatConstant.ZERO_SIX,
                     tween(
                         easing = FastOutSlowInEasing,
                         durationMillis = duration.div(count)

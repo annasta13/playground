@@ -6,7 +6,7 @@ import com.annas.playground.App
 import com.annas.playground.data.domain.usecase.getcity.GetCityUseCase
 import com.annas.playground.data.domain.usecase.getcity.GetCityUseCaseImpl
 import com.annas.playground.data.domain.usecase.prepareasset.PrepareMockDataUseCase
-import com.annas.playground.data.domain.usecase.prepareasset.PrepareMockDataUseCaseImpl
+import com.annas.playground.data.domain.usecase.prepareasset.PrepareInitialDataUseCaseImpl
 import com.annas.playground.data.local.db.ProductDatabase
 import com.annas.playground.data.repository.city.CityRepository
 import com.annas.playground.data.repository.city.CityRepositoryImpl
@@ -70,7 +70,7 @@ object AppModule {
         productRepository: ProductRepository,
         transactionRepository: TransactionRepository
     ): PrepareMockDataUseCase {
-        return PrepareMockDataUseCaseImpl(productRepository, transactionRepository)
+        return PrepareInitialDataUseCaseImpl(productRepository, transactionRepository)
     }
 
 }

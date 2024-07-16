@@ -1,4 +1,4 @@
-package com.annas.playground.ui.main
+package com.annas.playground.ui.activity
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

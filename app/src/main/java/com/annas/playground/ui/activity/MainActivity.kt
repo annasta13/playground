@@ -1,4 +1,4 @@
-package com.annas.playground.ui.main
+package com.annas.playground.ui.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

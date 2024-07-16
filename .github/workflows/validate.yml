@@ -1,0 +1,75 @@
+name: Android CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  lint-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Get the last 2 commits including the current one
+          # so we can run againts detekt for modified files.
+          fetch-depth: 2
+
+      - name: Fetch latest develop branch
+        run: git fetch
+      - name: Install detekt
+        uses: peter-murray/setup-detekt@v2
+        with:
+          detekt_version: 1.23.1
+
+      - name: Lint Modified Files
+        run: |
+          detekt-cli --version
+          MODIFIED_KOTLIN_FILES=$(git diff --diff-filter=d --name-only -r HEAD^1 HEAD -- **/*.kt | tr '\n' ',' | sed 's/\(.*\),/\1 /')
+          echo $MODIFIED_KOTLIN_FILES
+          if [ -z "$MODIFIED_KOTLIN_FILES" ]; then
+            echo "No Kotlin modified files found"
+          else
+            echo "Kotlin modified files found"
+            detekt-cli --input $MODIFIED_KOTLIN_FILES -c ./.github/detekt/compose-detekt-rule.yml --build-upon-default-config
+            if [ $? -eq 0 ]; then
+              echo "Detekt passed"
+            else
+              echo "Detekt failed"
+              exit 1
+            fi
+          fi
+
+#      - name: Cache SonarCloud packages
+#        uses: actions/cache@v4
+#        with:
+#          path: ~/.sonar/cache
+#          key: ${{ runner.os }}-sonar
+#          restore-keys: ${{ runner.os }}-sonar
+
+  unit-test:
+    needs: [ lint-check ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Exporting local properties
+        run: echo ACCESS_TOKEN=\"${{secrets.ACCESS_TOKEN}}\" > ./local.properties
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run Unit Tests
+        run: ./gradlew testDebugUnitTest

@@ -1,7 +1,3 @@
-/*
- * Copyright (c) Habil Education 2023. All rights reserved.
- */
-
 package com.annas.playground.ui.components
 
 import androidx.compose.foundation.background
@@ -25,7 +21,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -37,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import com.annas.playground.ui.theme.LargePadding
 import com.annas.playground.ui.theme.MediumPadding
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun BorderedTextField(
     modifier: Modifier = Modifier,

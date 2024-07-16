@@ -1,5 +1,6 @@
 package com.annas.playground.data.remote.builder
 
+import com.annas.playground.constants.LongConstant
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -8,8 +9,8 @@ import java.util.concurrent.TimeUnit
 object RetrofitBuilder {
     fun create(): ApiService {
         val client = OkHttpClient.Builder()
-            .connectTimeout(20, TimeUnit.SECONDS)
-            .readTimeout(20, TimeUnit.SECONDS)
+            .connectTimeout(LongConstant.TWENTY, TimeUnit.SECONDS)
+            .readTimeout(LongConstant.TWENTY, TimeUnit.SECONDS)
             .addInterceptor(HeaderInterceptor())
             .build()
         return Retrofit.Builder()

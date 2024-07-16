@@ -5,7 +5,7 @@ import okhttp3.Headers
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class HeaderInterceptor() : Interceptor {
+class HeaderInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val bearer = "Bearer ${BuildConfig.ACCESS_TOKEN}"
         val builder = Headers.Builder()

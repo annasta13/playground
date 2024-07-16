@@ -12,7 +12,7 @@ class TransactionRepositoryImpl(
 ) : TransactionRepository {
 
     override suspend fun prepareTransactionData() {
-        if (dao.countProduct() == 0) {
+        if (dao.countTransaction() == 0) {
             val transactionsIn = dataHelper.getMockTransactions(TransactionEntity.IN)
             val transactionsOut = dataHelper.getMockTransactions(TransactionEntity.OUT)
             dao.insertTransactions(transactionsIn)

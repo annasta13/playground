@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.annas.playground.R
+import com.annas.playground.constants.LongConstant
 import com.annas.playground.ui.theme.MediumPadding
 import kotlinx.coroutines.delay
 
@@ -27,7 +28,7 @@ import kotlinx.coroutines.delay
 fun LoadingScreen(modifier: Modifier = Modifier) {
     var holdLoading by remember { mutableStateOf(true) }
     LaunchedEffect(key1 = Unit) {
-        delay(300)
+        delay(LongConstant.THREE_HUNDREDS)
         holdLoading = false
     }
     Box(

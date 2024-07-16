@@ -13,7 +13,7 @@ interface TransactionDao {
     suspend fun insertTransactions(list: List<TransactionEntity>)
 
     @Query("SELECT COUNT(id) FROM `transaction`")
-    suspend fun countProduct(): Int
+    suspend fun countTransaction(): Int
 
     @Query("SELECT * FROM `transaction` WHERE product_id=:productId")
     suspend fun getTransactionsByProductId(productId: Int): List<TransactionEntity>

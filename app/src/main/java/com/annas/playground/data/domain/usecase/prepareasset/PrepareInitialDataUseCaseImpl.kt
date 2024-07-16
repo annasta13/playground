@@ -3,7 +3,7 @@ package com.annas.playground.data.domain.usecase.prepareasset
 import com.annas.playground.data.repository.product.ProductRepository
 import com.annas.playground.data.repository.transaction.TransactionRepository
 
-class PrepareMockDataUseCaseImpl(
+class PrepareInitialDataUseCaseImpl(
     private val productRepository: ProductRepository,
     private val transactionRepository: TransactionRepository
 ) : PrepareMockDataUseCase {

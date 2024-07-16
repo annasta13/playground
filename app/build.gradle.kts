@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -62,6 +63,10 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    @Suppress("UnstableApiUsage")
+    testOptions {//support mockito
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -84,7 +89,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
+    testImplementation(libs.mockito.kotlin)
     implementation(libs.hilt.work)
     ksp(libs.hilt.work.compiler)
     implementation(libs.hilt)
@@ -107,7 +112,6 @@ dependencies {
     implementation(libs.androidx.work.runtime)
     implementation(libs.androidx.core.splashscreen)
 
-    testImplementation(libs.test.mockk)
     testImplementation(libs.test.truth)
     testImplementation(libs.test.coroutine)
     testImplementation(libs.test.pagination)

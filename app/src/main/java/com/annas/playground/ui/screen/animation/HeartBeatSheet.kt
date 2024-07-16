@@ -23,6 +23,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.annas.playground.R
+import com.annas.playground.constants.IntConstant.EIGHTY
+import com.annas.playground.constants.IntConstant.FIFTY
+import com.annas.playground.constants.IntConstant.FORTY
+import com.annas.playground.constants.IntConstant.NINETY
+import com.annas.playground.constants.IntConstant.ONE_HUNDRED
+import com.annas.playground.constants.IntConstant.ONE__HUNDRED_AND_TEN
+import com.annas.playground.constants.IntConstant.ONE__HUNDRED_AND_TWENTY
+import com.annas.playground.constants.IntConstant.SEVENTY
+import com.annas.playground.constants.IntConstant.SIXTY
 import com.annas.playground.ui.components.Space
 import com.annas.playground.ui.components.TitleText
 import com.annas.playground.ui.theme.LargePadding
@@ -50,7 +59,19 @@ private fun HeartBeatSheetContent(
     onSelected: (Int) -> Unit,
     onDismiss: () -> Unit
 ) {
-    val list = remember { mutableStateListOf(40, 50, 60, 70, 80, 90, 100, 110, 120) }
+    val list = remember {
+        mutableStateListOf(
+            FORTY,
+            FIFTY,
+            SIXTY,
+            SEVENTY,
+            EIGHTY,
+            NINETY,
+            ONE_HUNDRED,
+            ONE__HUNDRED_AND_TEN,
+            ONE__HUNDRED_AND_TWENTY
+        )
+    }
     Column(
         modifier = Modifier.padding(LargePadding),
         verticalArrangement = Arrangement.spacedBy(MediumPadding),

@@ -1,0 +1,55 @@
+naming:
+  FunctionNaming:
+    ignoreAnnotated:
+      - 'Composable'
+  TopLevelPropertyNaming:
+    active: true
+    constantPattern: '[A-Z][A-Za-z0-9]*'
+    excludes:
+      - 'ui*/**.kt'
+complexity:
+  active: true
+  LongMethod:
+    active: true
+    ignoreAnnotated:
+      - 'Composable'
+    excludes:
+      - '**/*Graph.kt'
+  LongParameterList:
+    active: true
+    functionThreshold: 15
+    constructorThreshold: 15
+    ignoreDefaultParameters: true
+    ignoreAnnotated:
+      - 'Composable'
+      - 'Preview'
+  TooManyFunctions:
+    active: true
+    thresholdInObjects: 15
+    ignoreAnnotated:
+      - 'AndroidEntryPoint'
+  LargeClass:
+    active: true
+    excludes:
+      - '**/*Test.kt'
+  CyclomaticComplexMethod:
+    active: true
+    ignoreAnnotated:
+      - 'Composable'
+      - 'Preview'
+
+style:
+  active: true
+  MagicNumber:
+    active: true
+    ignorePropertyDeclaration: true
+    ignoreAnnotated:
+      - 'Preview'
+  UnusedPrivateMember:
+    ignoreAnnotated:
+    - 'Preview'
+  MaxLineLength:
+    active: true
+    ignoreAnnotated:
+      - 'Composable'
+      - 'Preview'

@@ -16,9 +16,9 @@ import javax.inject.Inject
 class UserListViewModel @Inject constructor(private val getUserUseCase: GetUserUseCase) :
     BaseViewModel() {
 
-    var list = Pager(PagingConfig(pageSize = 1)) {
+    var list = Pager(config = PagingConfig(pageSize = 1)) {
         ListPagingSource(invoke = { getUserUseCase.invoke(page = it) })
-    }.flow.cachedIn(viewModelScope)
+    }.flow
         private set
 
     fun fetchUsers() = execute {
