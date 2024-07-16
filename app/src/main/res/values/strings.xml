@@ -26,4 +26,7 @@
     <string name="date">Date</string>
     <string name="select_gender">Select Gender</string>
     <string name="select_transaction_type">Select Transaction Type</string>
+    <string name="csv_file_imported">CSV File Imported</string>
+    <string name="string_resource_generated">String Resource Generated</string>
+    <string name="csv_based_string_resource">CSV-Based String Resource</string>
 </resources>

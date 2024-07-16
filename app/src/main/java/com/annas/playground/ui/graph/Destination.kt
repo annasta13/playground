@@ -13,12 +13,11 @@ object Destination {
     const val USER_LIST = "user-list-screen"
     const val CREATE_USER = "create-user-screen"
     const val CREATE_TRANSACTION = "create-transaction-screen/{$PRODUCT_ID}/{$MIN_DATE}/{$STOCK}"
+    const val GENERATOR_RESULT = "generator-result-screen"
 }
 
 data class Section(
-    val id: Int,
-    val title: String,
-    val route: String
+    val id: Int, val title: String, val route: String
 ) {
     companion object {
         val sectionList = listOf(
@@ -26,6 +25,7 @@ data class Section(
             Section(2, "Data Processing", route = Destination.PRODUCT_LIST),
             Section(3, "Heart Beat Animation", route = Destination.ANIMATION),
             Section(4, "Api Fetching", route = Destination.USER_LIST),
+            Section(5, "CSV-Based String Resources", route = Destination.GENERATOR_RESULT),
         )
     }
 }

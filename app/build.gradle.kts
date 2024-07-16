@@ -76,6 +76,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.paging.compose.android)
     implementation(libs.androidx.constraintlayout.compose)
+    implementation(libs.androidx.appcompat)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -101,6 +102,7 @@ dependencies {
     implementation(libs.compose.hilt.navigation)
     implementation(libs.converter.moshi)
     implementation(libs.accompanist.swiperefresh)
+    implementation (libs.landscapist.glide)
 
     implementation(libs.androidx.work.runtime)
     implementation(libs.androidx.core.splashscreen)

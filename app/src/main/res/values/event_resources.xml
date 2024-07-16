@@ -1,0 +1,11 @@
+<resources>
+    <string name="event_login_button_click">login_button_click</string>
+    <string name="event_forgot_password_button_click">forgot_password_button_click</string>
+    <string name="event_profile_button_click">profile_button_click</string>
+    <string name="event_settings_button_click">settings_button_click</string>
+    <string name="event_register_button_click">register_button_click</string>
+    <string name="event_swipe_refresh_triggered">swipe_refresh_triggered</string>
+    <string name="event_see_detail_promo_click">see_detail_promo_click</string>
+    <string name="event_promo_button_click">promo_button_click</string>
+    <string name="event_onboarding_skip_button_click">onboarding_skip_button_click</string>
+</resources>

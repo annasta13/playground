@@ -19,6 +19,7 @@ import com.annas.playground.ui.screen.apifetching.user.read.UserListScreen
 import com.annas.playground.ui.screen.dataprocessing.createtransaction.CreateTransactionScreen
 import com.annas.playground.ui.screen.dataprocessing.productdetail.ProductDetailScreen
 import com.annas.playground.ui.screen.dataprocessing.productlist.ProductListScreen
+import com.annas.playground.ui.screen.generator.GeneratorResultScreen
 import com.annas.playground.ui.screen.home.HomeScreen
 import com.annas.playground.ui.screen.search.SearchScreen
 import com.annas.playground.ui.theme.enterTransition
@@ -64,6 +65,10 @@ fun NavGraph() {
 
         registerScreen(route = Destination.ANIMATION) {
             AnimationScreen(onNavigateUp = action.navigateUp)
+        }
+
+        registerScreen(route = Destination.GENERATOR_RESULT) {
+            GeneratorResultScreen(onNavigateUp = action.navigateUp)
         }
 
         registerScreen(route = Destination.USER_LIST) {
