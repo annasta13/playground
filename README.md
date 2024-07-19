@@ -1,7 +1,8 @@
 Playground: Clean Architecture Android App
 ==========
 [![build](https://github.com/annasta13/playground/actions/workflows/build.yml/badge.svg)](https://github.com/annasta13/playground/actions/workflows/gradle.yml)
-[![GitHub license](https://img.shields.io/github/license/annasta13/playground.svg?style=plastic)](https://github.com/annasta13/playground/blob/main/LICENSE)
+[![unit-test](https://github.com/annasta13/playground/actions/workflows/unit-test.yml/badge.svg)](https://github.com/annasta13/playground/actions/workflows/unit-test.yml)
+[![GitHub license](https://img.shields.io/github/license/annasta13/playground.svg?style=plastic)](https://github.com/annasta13/playground/blob/master/LICENSE)
 <a href="https://developer.android.com/about/versions/nougat/android-7.0"><img alt="API" src="https://img.shields.io/badge/minSdkVersion-24-yellow.svg?style=true"/></a>
 <a href="https://developer.android.com/about/versions/14"><img alt="API" src="https://img.shields.io/badge/targetSdkVersion-34-green.svg?style=true"/></a>
 
@@ -39,7 +40,7 @@ Playground: Clean Architecture Android App
 ### Gradle Configuration
 Gradle synchronization needs adjustment from local.properties. To synchronize gradle successfully, login to [Go Rest][1] and generate the access token. 
 Then, add the access token to `local.properties` file as shown below.
-```agsl
+```
 ACCESS_TOKEN="c8abb81c572e6c3xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
 
