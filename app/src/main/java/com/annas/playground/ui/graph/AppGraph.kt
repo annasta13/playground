@@ -13,7 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.annas.playground.ui.screen.animation.AnimationScreen
+import com.annas.playground.ui.screen.heartbeat.AnimationScreen
 import com.annas.playground.ui.screen.apifetching.user.create.CreateUserScreen
 import com.annas.playground.ui.screen.apifetching.user.read.UserListScreen
 import com.annas.playground.ui.screen.dataprocessing.createtransaction.CreateTransactionScreen

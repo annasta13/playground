@@ -32,7 +32,7 @@ jobs:
             echo "No Kotlin modified files found"
           else
             echo "Kotlin modified files found"
-            detekt-cli --input $MODIFIED_KOTLIN_FILES -c ./.github/detekt/compose-detekt-rule.yml --build-upon-default-config
+            detekt-cli --input $MODIFIED_KOTLIN_FILES -c ./detekt/compose-detekt-rule.yml --build-upon-default-config
             if [ $? -eq 0 ]; then
               echo "Detekt passed"
             else
@@ -41,16 +41,11 @@ jobs:
             fi
           fi
 
-#      - name: Cache SonarCloud packages
-#        uses: actions/cache@v4
-#        with:
-#          path: ~/.sonar/cache
-#          key: ${{ runner.os }}-sonar
-#          restore-keys: ${{ runner.os }}-sonar
-
   unit-test:
     needs: [ lint-check ]
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - name: set up JDK 17
@@ -60,18 +55,34 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
       - name: Exporting local properties
         run: echo ACCESS_TOKEN=\"${{secrets.ACCESS_TOKEN}}\" > ./local.properties
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Run Unit Tests
-        run: ./gradlew testDebugUnitTest
+        run: ./gradlew jacocoDebugCodeCoverage
+
+      - name: Add coverage to PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.6.1
+        with:
+          paths: ${{ github.workspace }}/**/build/reports/jacoco/jacocoDebugCodeCoverage/jacocoDebugCodeCoverage.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 70
+          min-coverage-changed-files: 60
+
+      - name: Collect reports and compress
+        if: success() || failure()
+        run: |
+          find . -type f | grep build/reports | zip build_reports.zip -@
+          ls -alh build_reports.zip
+
+      - name: Upload Reports
+        uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: build_reports
+          path: |
+            build_reports.zip
+            retention-days: 1
