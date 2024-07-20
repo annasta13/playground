@@ -1,4 +1,4 @@
-package com.annas.playground.ui.screen.animation
+package com.annas.playground.ui.screen.heartbeat
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing

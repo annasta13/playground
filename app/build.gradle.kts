@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.detekt)
+    jacoco
 }
 
 android {
@@ -45,6 +46,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            enableAndroidTestCoverage = true
+            enableUnitTestCoverage = true
+            applyJacoco()
         }
     }
     compileOptions {
@@ -107,7 +111,7 @@ dependencies {
     implementation(libs.compose.hilt.navigation)
     implementation(libs.converter.moshi)
     implementation(libs.accompanist.swiperefresh)
-    implementation (libs.landscapist.glide)
+    implementation(libs.landscapist.glide)
 
     implementation(libs.androidx.work.runtime)
     implementation(libs.androidx.core.splashscreen)
@@ -124,4 +128,11 @@ fun readProperties(key: String): String {
         }
     }
     return properties[key] as String
+}
+
+tasks.withType(Test::class) {
+    configure<JacocoTaskExtension> {
+        isIncludeNoLocationClasses = true
+        excludes = listOf("jdk.internal.*")
+    }
 }

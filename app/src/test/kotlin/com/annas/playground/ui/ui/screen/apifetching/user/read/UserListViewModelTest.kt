@@ -50,7 +50,7 @@ class UserListViewModelTest : BaseTest() {
 
         //WHEN
         viewModel = UserListViewModel(getUserUseCase)
-
+        viewModel.fetchUsers()
         val items: Flow<PagingData<User>> = viewModel.list
         val snapshot: List<User> = items.asSnapshot()
 
