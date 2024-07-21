@@ -9,8 +9,8 @@ import java.util.concurrent.TimeUnit
 object RetrofitBuilder {
     fun create(): ApiService {
         val client = OkHttpClient.Builder()
-            .connectTimeout(LongConstant.TWENTY, TimeUnit.SECONDS)
-            .readTimeout(LongConstant.TWENTY, TimeUnit.SECONDS)
+            .connectTimeout(LongConstant.TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .readTimeout(LongConstant.TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .addInterceptor(HeaderInterceptor())
             .build()
         return Retrofit.Builder()

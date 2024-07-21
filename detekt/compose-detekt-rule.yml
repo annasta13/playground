@@ -4,7 +4,6 @@ naming:
       - 'Composable'
   TopLevelPropertyNaming:
     active: true
-    constantPattern: '[A-Z][A-Za-z0-9]*'
     excludes:
       - 'ui*/**.kt'
 complexity:

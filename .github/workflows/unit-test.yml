@@ -63,6 +63,7 @@ jobs:
       - name: Run Unit Tests
         run: ./gradlew jacocoDebugCodeCoverage
 
+      # https://github.com/Madrapps/jacoco-report?tab=readme-ov-file
       - name: Add coverage to PR
         id: jacoco
         uses: madrapps/jacoco-report@v1.6.1
@@ -71,6 +72,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 70
           min-coverage-changed-files: 60
+          title: 'Coverage Report'
+          pass-emoji: ':green_circle:'
+          fail-emoji: ':red_circle:'
 
       - name: Collect reports and compress
         if: success() || failure()

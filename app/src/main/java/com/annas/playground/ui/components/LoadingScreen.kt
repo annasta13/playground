@@ -28,7 +28,7 @@ import kotlinx.coroutines.delay
 fun LoadingScreen(modifier: Modifier = Modifier) {
     var holdLoading by remember { mutableStateOf(true) }
     LaunchedEffect(key1 = Unit) {
-        delay(LongConstant.THREE_HUNDREDS)
+        delay(LongConstant.LOAD_DELAY)
         holdLoading = false
     }
     Box(

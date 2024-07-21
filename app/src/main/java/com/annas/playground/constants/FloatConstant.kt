@@ -1,7 +1,7 @@
 package com.annas.playground.constants
 
 object FloatConstant {
-    const val ZERO_SIX: Float = 0.6f
-    const val ZERO_FIVE: Float = 0.5f
-    const val ONE_HUNDRED_AND_EIGHTY: Float = 180f
+    const val DEFAULT_HEART_BEAT_SCALE: Float = 0.6f
+    const val HEART_BEATING_SCALE: Float = 0.5f
+    const val REVERSE_ROTATION: Float = 180f
 }
