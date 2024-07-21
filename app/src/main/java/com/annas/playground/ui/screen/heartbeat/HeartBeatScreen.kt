@@ -41,7 +41,7 @@ import androidx.compose.ui.unit.dp
 import com.annas.playground.R
 import com.annas.playground.constants.FloatConstant
 import com.annas.playground.constants.IntConstant
-import com.annas.playground.constants.IntConstant.SIXTY
+import com.annas.playground.constants.IntConstant.SECONDS_OF_MINUTE
 import com.annas.playground.ui.components.BodyText
 import com.annas.playground.ui.components.ScreenContainer
 import com.annas.playground.ui.components.ThemePreviewParameterProvider
@@ -58,15 +58,15 @@ fun AnimationScreen(onNavigateUp: () -> Unit) {
         onLeadingIconClicked = onNavigateUp
     ) {
 
-        val scaleFactor = remember { Animatable(FloatConstant.ZERO_SIX) }
+        val scaleFactor = remember { Animatable(FloatConstant.DEFAULT_HEART_BEAT_SCALE) }
         var count by remember { mutableIntStateOf(1) }
-        var heartBitPerMinute by remember { mutableIntStateOf(IntConstant.SIX) }
+        var heartBitPerMinute by remember { mutableIntStateOf(IntConstant.FIFTY_BEAT_PER_SECONDS) }
 
         LaunchedEffect(key1 = Unit) {
             while (true) {
-                val duration = IntConstant.ONE_THOUSAND / heartBitPerMinute * SIXTY
+                val duration = IntConstant.ONE_SECOND / heartBitPerMinute * SECONDS_OF_MINUTE
                 scaleFactor.animateTo(
-                    FloatConstant.ZERO_FIVE,
+                    FloatConstant.HEART_BEATING_SCALE,
                     tween(
                         easing = FastOutSlowInEasing,
                         durationMillis = duration.div(count)
@@ -74,7 +74,7 @@ fun AnimationScreen(onNavigateUp: () -> Unit) {
                 )
                 count++
                 scaleFactor.animateTo(
-                    FloatConstant.ZERO_SIX,
+                    FloatConstant.DEFAULT_HEART_BEAT_SCALE,
                     tween(
                         easing = FastOutSlowInEasing,
                         durationMillis = duration.div(count)

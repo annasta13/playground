@@ -112,8 +112,7 @@ private fun ProductDetailContent(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             val typeLabel = if (it.type == IN) StringConstant.STOCKING else SELLING
-                            val rotation =
-                                if (it.type == IN) FloatConstant.ONE_HUNDRED_AND_EIGHTY else 0f
+                            val rotation = if (it.type == IN) FloatConstant.REVERSE_ROTATION else 0f
                             val color = if (it.type == IN) MaterialTheme.colorScheme.outline
                             else Color.Magenta
                             Column {
