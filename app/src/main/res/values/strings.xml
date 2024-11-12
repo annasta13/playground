@@ -29,4 +29,6 @@
     <string name="csv_file_imported">CSV File Imported</string>
     <string name="string_resource_generated">String Resource Generated</string>
     <string name="csv_based_string_resource">CSV-Based String Resource</string>
+    <string name="loading_animation">Loading Animation</string>
+    <string name="loading_animation_title">Sample of Loading Animation</string>
 </resources>

@@ -13,14 +13,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.annas.playground.ui.screen.heartbeat.AnimationScreen
 import com.annas.playground.ui.screen.apifetching.user.create.CreateUserScreen
 import com.annas.playground.ui.screen.apifetching.user.read.UserListScreen
 import com.annas.playground.ui.screen.dataprocessing.createtransaction.CreateTransactionScreen
 import com.annas.playground.ui.screen.dataprocessing.productdetail.ProductDetailScreen
 import com.annas.playground.ui.screen.dataprocessing.productlist.ProductListScreen
 import com.annas.playground.ui.screen.generator.GeneratorResultScreen
+import com.annas.playground.ui.screen.heartbeat.AnimationScreen
 import com.annas.playground.ui.screen.home.HomeScreen
+import com.annas.playground.ui.screen.loadinganimation.LoadingAnimationScreen
 import com.annas.playground.ui.screen.search.SearchScreen
 import com.annas.playground.ui.theme.enterTransition
 import com.annas.playground.ui.theme.exitTransition
@@ -103,6 +104,9 @@ fun NavGraph() {
             })
         }
 
+        registerScreen(route = Destination.LOADING_ANIMATION) {
+            LoadingAnimationScreen()
+        }
     }
 }
 
