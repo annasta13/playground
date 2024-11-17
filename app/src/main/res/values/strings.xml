@@ -31,4 +31,9 @@
     <string name="csv_based_string_resource">CSV-Based String Resource</string>
     <string name="loading_animation">Loading Animation</string>
     <string name="loading_animation_title">Sample of Loading Animation</string>
+    <string name="highest_score">Highest Score %d</string>
+    <string name="score">Score %d</string>
+    <string name="ready">Ready</string>
+    <string name="set">Set</string>
+    <string name="go">Go</string>
 </resources>

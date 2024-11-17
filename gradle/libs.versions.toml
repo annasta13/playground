@@ -36,6 +36,7 @@ coroutineTest = "1.8.1"
 detekt = "1.23.1"
 kover = "0.7.3"
 jacoco = "0.8.11"
+securityCrypto = "1.0.0"
 
 
 [libraries]
@@ -95,6 +96,7 @@ test-pagination = { group = "androidx.paging", name = "paging-testing", version.
 android-build-tools = { module = "com.android.tools.build:gradle", version.ref = "buildTools" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 jacoco = { group = "org.jacoco", name = "org.jacoco.core", version.ref = "jacoco" }
+androidx-security-crypto-ktx = { group = "androidx.security", name = "security-crypto", version.ref = "securityCrypto" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

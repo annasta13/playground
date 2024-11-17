@@ -86,6 +86,7 @@ dependencies {
     implementation(libs.androidx.paging.compose.android)
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.security.crypto.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -21,6 +21,7 @@ import com.annas.playground.ui.screen.dataprocessing.productlist.ProductListScre
 import com.annas.playground.ui.screen.generator.GeneratorResultScreen
 import com.annas.playground.ui.screen.heartbeat.AnimationScreen
 import com.annas.playground.ui.screen.home.HomeScreen
+import com.annas.playground.ui.screen.jumpinggame.JumpingGameScreen
 import com.annas.playground.ui.screen.loadinganimation.LoadingAnimationScreen
 import com.annas.playground.ui.screen.search.SearchScreen
 import com.annas.playground.ui.theme.enterTransition
@@ -106,6 +107,10 @@ fun NavGraph() {
 
         registerScreen(route = Destination.LOADING_ANIMATION) {
             LoadingAnimationScreen()
+        }
+
+        registerScreen(route = Destination.JUMPING_GAME) {
+            JumpingGameScreen()
         }
     }
 }

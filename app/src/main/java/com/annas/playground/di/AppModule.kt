@@ -5,14 +5,15 @@ import androidx.room.Room
 import com.annas.playground.App
 import com.annas.playground.data.domain.usecase.getcity.GetCityUseCase
 import com.annas.playground.data.domain.usecase.getcity.GetCityUseCaseImpl
-import com.annas.playground.data.domain.usecase.prepareasset.PrepareMockDataUseCase
 import com.annas.playground.data.domain.usecase.prepareasset.PrepareInitialDataUseCaseImpl
+import com.annas.playground.data.domain.usecase.prepareasset.PrepareMockDataUseCase
 import com.annas.playground.data.local.db.ProductDatabase
 import com.annas.playground.data.repository.city.CityRepository
 import com.annas.playground.data.repository.city.CityRepositoryImpl
 import com.annas.playground.data.repository.product.ProductRepository
 import com.annas.playground.data.repository.transaction.TransactionRepository
 import com.annas.playground.helper.DataHelper
+import com.annas.playground.helper.PreferenceHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,7 +31,11 @@ object AppModule {
     fun provideApplication(@ApplicationContext app: Context): App {
         return app as App
     }
-
+    @Singleton
+    @Provides
+    fun provideSharedPreference(@ApplicationContext app: Context): PreferenceHelper {
+        return PreferenceHelper(app)
+    }
     @Singleton
     @Provides
     fun provideProductDatabase(@ApplicationContext context: Context): ProductDatabase {

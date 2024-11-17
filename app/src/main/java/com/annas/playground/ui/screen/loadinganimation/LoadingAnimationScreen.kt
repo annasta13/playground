@@ -1,6 +1,5 @@
 package com.annas.playground.ui.screen.loadinganimation
 
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,8 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -23,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -32,6 +28,12 @@ import androidx.compose.ui.unit.dp
 import com.annas.playground.R
 import com.annas.playground.ui.components.HeadingText
 import com.annas.playground.ui.components.ScreenContainer
+import com.annas.playground.ui.components.animateHorizontalAlignmentAsState
+import com.annas.playground.ui.screen.loadinganimation.LoadingAnimationState.DEFAULT_HORIZONTAL_BIAS
+import com.annas.playground.ui.screen.loadinganimation.LoadingAnimationState.HIDING_HORIZONTAL_INTERVAL
+import com.annas.playground.ui.screen.loadinganimation.LoadingAnimationState.HORIZONTAL_INTERVAL
+import com.annas.playground.ui.screen.loadinganimation.LoadingAnimationState.HORIZONTAL_MOTION
+import com.annas.playground.ui.screen.loadinganimation.LoadingAnimationState.TARGET_HORIZONTAL_BIAS
 import com.annas.playground.ui.theme.LargePadding
 import com.annas.playground.ui.theme.SmallPadding
 import kotlinx.coroutines.delay
@@ -40,20 +42,20 @@ import kotlinx.coroutines.launch
 @Composable
 fun LoadingAnimationScreen() {
     ScreenContainer(barTitle = stringResource(id = R.string.loading_animation)) {
-        var horizontalBias by remember { mutableFloatStateOf(-1f) }
+        var horizontalBias by remember { mutableFloatStateOf(-DEFAULT_HORIZONTAL_BIAS) }
         var showing by remember { mutableStateOf(true) }
         val alignment by animateHorizontalAlignmentAsState(horizontalBias)
         val scope = rememberCoroutineScope()
         LaunchedEffect(key1 = Unit) {
             scope.launch {
                 while (true) {
-                    if (horizontalBias < 1f) {
-                        delay(30)
-                        horizontalBias += 0.05f
+                    if (horizontalBias < DEFAULT_HORIZONTAL_BIAS) {
+                        delay(HORIZONTAL_INTERVAL)
+                        horizontalBias += HORIZONTAL_MOTION
                     } else {
                         showing = false
-                        horizontalBias = -2f
-                        delay(80)
+                        horizontalBias = TARGET_HORIZONTAL_BIAS
+                        delay(HIDING_HORIZONTAL_INTERVAL)
                         showing = true
                     }
                 }
@@ -102,15 +104,13 @@ fun LoadingAnimationScreen() {
     }
 }
 
-@Composable
-private fun animateHorizontalAlignmentAsState(
-    targetBiasValue: Float
-): State<BiasAlignment.Horizontal> {
-    val bias by animateFloatAsState(targetBiasValue, label = "bias")
-    val state = remember { derivedStateOf { BiasAlignment.Horizontal(bias) } }
-    return state
+object LoadingAnimationState {
+    const val DEFAULT_HORIZONTAL_BIAS = 1f
+    const val TARGET_HORIZONTAL_BIAS = -2f
+    const val HORIZONTAL_INTERVAL = 30L
+    const val HORIZONTAL_MOTION = 0.05f
+    const val HIDING_HORIZONTAL_INTERVAL = 100L
 }
-
 
 @Preview
 @Composable

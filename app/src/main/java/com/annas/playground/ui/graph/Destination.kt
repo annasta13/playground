@@ -15,6 +15,7 @@ object Destination {
     const val CREATE_TRANSACTION = "create-transaction-screen/{$PRODUCT_ID}/{$MIN_DATE}/{$STOCK}"
     const val GENERATOR_RESULT = "generator-result-screen"
     const val LOADING_ANIMATION = "loading-animation-screen"
+    const val JUMPING_GAME = "jumping-game-screen"
 }
 
 data class Section(
@@ -28,6 +29,7 @@ data class Section(
             Section(4, "Api Fetching", route = Destination.USER_LIST),
             Section(5, "CSV-Based String Resources", route = Destination.GENERATOR_RESULT),
             Section(6, "Loading Animation", route = Destination.LOADING_ANIMATION),
+            Section(7, "Jumping Game", route = Destination.JUMPING_GAME),
         )
     }
 }
