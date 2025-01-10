@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt) apply false
     alias(libs.plugins.kotlin.ksp) apply false
     alias(libs.plugins.detekt)
+//    alias(libs.plugins.gms.service) apply false
     jacoco
 }
 

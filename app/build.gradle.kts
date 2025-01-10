@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.detekt)
+//    alias(libs.plugins.gms.service)
     jacoco
 }
 
@@ -87,6 +88,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.security.crypto.ktx)
+    implementation(libs.vision.common)
+    implementation(libs.play.services.mlkit.text.recognition.common)
+    implementation(libs.play.services.mlkit.text.recognition)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -113,6 +117,7 @@ dependencies {
     implementation(libs.converter.moshi)
     implementation(libs.accompanist.swiperefresh)
     implementation(libs.landscapist.glide)
+    implementation(libs.mlkit.document.scanner)
 
     implementation(libs.androidx.work.runtime)
     implementation(libs.androidx.core.splashscreen)
