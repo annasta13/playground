@@ -49,8 +49,8 @@ import com.annas.playground.ui.components.animateVerticalAlignmentAsState
 import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.CONSTRAINT_MOTION_DELAY
 import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.CONSTRAINT_SPEED_DELAY
 import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.DEFAULT_CONSTRAINT_POSITION
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.DEFAULT_COUNTER
 import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.DEFAULT_VERTICAL_BIAS
+import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.FALL_DELAY
 import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.HIDING_DELAY
 import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.HORIZONTAL_BIAS_INTERVAL
 import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.JUMP_DELAY
@@ -77,32 +77,21 @@ fun JumpingGameScreen(
 private fun JumpingGameContentView(highestScore: Int, onFinish: (Int) -> Unit) {
     var verticalBias by remember { mutableFloatStateOf(DEFAULT_VERTICAL_BIAS) }
     val playerAlignment by animateVerticalAlignmentAsState(verticalBias)
-    var counter by remember { mutableIntStateOf(DEFAULT_COUNTER) }
     var isGameOver by remember { mutableStateOf(false) }
     var isGameStarted by remember { mutableStateOf(false) }
     var playerBounds by remember { mutableStateOf<Rect?>(null) }
     var currentScore by remember { mutableIntStateOf(0) }
     val scope = rememberCoroutineScope()
 
-    val prepareGame: () -> Unit = {
-        scope.launch {
-            while (counter > 0) {
-                delay(timeMillis = 1000)
-                counter--
-                if (counter == 1) isGameStarted = true
-            }
-        }
-    }
     val onRetry: () -> Unit = {
         verticalBias = DEFAULT_VERTICAL_BIAS
-        counter = DEFAULT_COUNTER
         isGameOver = false
         isGameStarted = false
         currentScore = 0
-        prepareGame()
     }
-    LaunchedEffect(Unit) {
-        prepareGame()
+
+    val startGame: () -> Unit = {
+        isGameStarted = true
     }
 
     val finishGame: () -> Unit = {
@@ -116,8 +105,8 @@ private fun JumpingGameContentView(highestScore: Int, onFinish: (Int) -> Unit) {
             var isDown = false
             while (isUp) {
                 if (verticalBias > TARGET_VERTICAL_BIAS) {
-                    delay(JUMP_DELAY)
                     verticalBias -= VERTICAL_BIAS_INTERVAL
+                    delay(JUMP_DELAY)
                 } else {
                     isUp = false
                     isDown = true
@@ -130,7 +119,7 @@ private fun JumpingGameContentView(highestScore: Int, onFinish: (Int) -> Unit) {
                     verticalBias = DEFAULT_VERTICAL_BIAS
                     isDown = false
                 }
-                delay(JUMP_DELAY)
+                delay(FALL_DELAY)
             }
         }
     }
@@ -141,8 +130,8 @@ private fun JumpingGameContentView(highestScore: Int, onFinish: (Int) -> Unit) {
                 .fillMaxSize()
                 .background(Color.DarkGray)
                 .clickable(
-                    onClick = movePlayer,
-                    enabled = !isGameOver && isGameStarted,
+                    onClick = if (!isGameStarted) startGame else movePlayer,
+                    enabled = !isGameOver,
                     indication = null,
                     interactionSource = remember { MutableInteractionSource() }
                 )
@@ -165,20 +154,10 @@ private fun JumpingGameContentView(highestScore: Int, onFinish: (Int) -> Unit) {
                     .align(Alignment.Center),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                if (counter > 0) HeadingText(
-                    text = when (counter) {
-                        3 -> stringResource(id = R.string.ready)
-                        2 -> stringResource(id = R.string.set)
-                        1 -> stringResource(id = R.string.go)
-                        else -> ""
-                    },
+                if (!isGameStarted) HeadingText(
+                    text = stringResource(id = R.string.tap_to_start),
                     fontWeight = FontWeight.SemiBold,
-                    color = when (counter) {
-                        3 -> Color.Red
-                        2 -> Color.Yellow
-                        1 -> Color.Green
-                        else -> Color.White
-                    }
+                    color = Color.White
                 )
                 else HeadingText(
                     text = stringResource(R.string.score, currentScore),
@@ -299,9 +278,9 @@ private class JumpingGamePreviewProvider : PreviewParameterProvider<Boolean> {
 
 
 object JumpingGameConstants {
-    const val DEFAULT_COUNTER = 3
     const val DEFAULT_CONSTRAINT_POSITION = 2f
     const val JUMP_DELAY = 15L
+    const val FALL_DELAY = 15L
     const val HIDING_DELAY = 100L
     const val CONSTRAINT_SPEED_DELAY = 20L
     const val MIN_SPEED_DELAY = 30L
@@ -311,5 +290,5 @@ object JumpingGameConstants {
     const val TARGET_VERTICAL_BIAS = -2.5f
     const val DEFAULT_VERTICAL_BIAS = 1f
     const val GAME_OVER_BUTTON_FRACTION = 0.4f
-    const val CONSTRAINT_MOTION_DELAY = 1L
+    const val CONSTRAINT_MOTION_DELAY = 1000L
 }

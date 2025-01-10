@@ -18,6 +18,7 @@ import com.annas.playground.ui.screen.apifetching.user.read.UserListScreen
 import com.annas.playground.ui.screen.dataprocessing.createtransaction.CreateTransactionScreen
 import com.annas.playground.ui.screen.dataprocessing.productdetail.ProductDetailScreen
 import com.annas.playground.ui.screen.dataprocessing.productlist.ProductListScreen
+import com.annas.playground.ui.screen.documentScanner.DocumentScannerScreen
 import com.annas.playground.ui.screen.generator.GeneratorResultScreen
 import com.annas.playground.ui.screen.heartbeat.AnimationScreen
 import com.annas.playground.ui.screen.home.HomeScreen
@@ -111,6 +112,10 @@ fun NavGraph() {
 
         registerScreen(route = Destination.JUMPING_GAME) {
             JumpingGameScreen()
+        }
+
+        registerScreen(route = Destination.SCAN_IMAGE_TEXT) {
+            DocumentScannerScreen(action.navigateUp)
         }
     }
 }

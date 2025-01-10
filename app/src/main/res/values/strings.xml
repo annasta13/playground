@@ -33,7 +33,16 @@
     <string name="loading_animation_title">Sample of Loading Animation</string>
     <string name="highest_score">Highest Score %d</string>
     <string name="score">Score %d</string>
-    <string name="ready">Ready</string>
-    <string name="set">Set</string>
-    <string name="go">Go</string>
+    <string name="tap_to_start">Tap to Start</string>
+    <string name="warning">Warning</string>
+    <string name="permission_message">Permission needed for this feature\n</string>
+    <string name="grant">Grant</string>
+    <string name="exit">Exit</string>
+    <string name="scan_image_text">Scan Image Text</string>
+    <string name="retake">Retake</string>
+    <string name="scan_result">Scan Result</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="copy_text">Copy Text</string>
+    <string name="camera_permission_text">Camera permission is needed to access this feature.</string>
+    <string name="camera_permission_denied">Unable to continue due to rejected permission</string>
 </resources>
