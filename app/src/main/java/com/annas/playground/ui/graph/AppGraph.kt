@@ -24,6 +24,10 @@ import com.annas.playground.ui.screen.heartbeat.AnimationScreen
 import com.annas.playground.ui.screen.home.HomeScreen
 import com.annas.playground.ui.screen.jumpinggame.JumpingGameScreen
 import com.annas.playground.ui.screen.loadinganimation.LoadingAnimationScreen
+import com.annas.playground.ui.screen.objectdetector.ObjectDetectorScreen
+import com.annas.playground.helper.ObjectDetectorType
+import com.annas.playground.ui.screen.objectdetector.tensorflow.TensorflowDetectorScreen
+import com.annas.playground.ui.screen.objectdetector.yolo.YoloDetectorScreen
 import com.annas.playground.ui.screen.search.SearchScreen
 import com.annas.playground.ui.theme.enterTransition
 import com.annas.playground.ui.theme.exitTransition
@@ -116,6 +120,21 @@ fun NavGraph() {
 
         registerScreen(route = Destination.SCAN_IMAGE_TEXT) {
             DocumentScannerScreen(action.navigateUp)
+        }
+
+        registerScreen(route = Destination.OBJECT_DETECTOR) {
+            ObjectDetectorScreen(onNavigate = action.navigate, onNavigateUp = action.navigateUp)
+        }
+
+        registerScreen(route = Destination.TENSORFLOW_DETECTOR) {
+            val type = it.arguments?.getString(RouteParam.MODEL)?.toIntOrNull()
+                ?: ObjectDetectorType.MODEL_EFFICIENTDET_V2
+            TensorflowDetectorScreen(navigateUp = action.navigateUp, type = type)
+        }
+
+
+        registerScreen(route = Destination.YOLO_DETECTOR) {
+            YoloDetectorScreen(navigateUp = action.navigateUp)
         }
     }
 }

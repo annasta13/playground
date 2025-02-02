@@ -39,10 +39,15 @@
     <string name="grant">Grant</string>
     <string name="exit">Exit</string>
     <string name="scan_image_text">Scan Image Text</string>
+    <string name="scan_object">Scan Object</string>
     <string name="retake">Retake</string>
     <string name="scan_result">Scan Result</string>
     <string name="take_picture">Take Picture</string>
     <string name="copy_text">Copy Text</string>
     <string name="camera_permission_text">Camera permission is needed to access this feature.</string>
     <string name="camera_permission_denied">Unable to continue due to rejected permission</string>
+    <string name="analyze">Analyze</string>
+    <string name="app_not_ready">App not ready</string>
+    <string name="object_detector">Object Detector</string>
+    <string name="select_model">Select Model</string>
 </resources>

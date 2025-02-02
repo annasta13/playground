@@ -3,7 +3,7 @@ package com.annas.playground.constants
 object IntConstant {
     const val SECONDS_OF_MINUTE: Int = 60
     const val ONE_SECOND: Int = 1000
-
+    const val BITMAP_QUALITY: Int = 100
     const val FORTY_BEAT_PER_SECONDS: Int = 40
     const val FIFTY_BEAT_PER_SECONDS: Int = 50
     const val SIXTY_BEAT_PER_SECONDS: Int = 60

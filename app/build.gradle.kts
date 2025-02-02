@@ -7,9 +7,11 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.detekt)
-//    alias(libs.plugins.gms.service)
+    id ("kotlin-kapt")
+    id("download-tasks")
     jacoco
 }
+
 
 android {
     namespace = "com.annas.playground"
@@ -26,6 +28,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
         buildConfigField("String", "ACCESS_TOKEN", readProperties("ACCESS_TOKEN"))
     }
 
@@ -52,6 +55,7 @@ android {
             applyJacoco()
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -62,15 +66,22 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+        dataBinding = true
+        mlModelBinding = true
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+
     }
     @Suppress("UnstableApiUsage")
     testOptions {//support mockito
         unitTests.isReturnDefaultValues = true
+    }
+
+    aaptOptions {
+        noCompress("tflite", "lite")
     }
 }
 
@@ -91,6 +102,9 @@ dependencies {
     implementation(libs.vision.common)
     implementation(libs.play.services.mlkit.text.recognition.common)
     implementation(libs.play.services.mlkit.text.recognition)
+    implementation(libs.androidx.coordinatorlayout)
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -125,6 +139,24 @@ dependencies {
     testImplementation(libs.test.truth)
     testImplementation(libs.test.coroutine)
     testImplementation(libs.test.pagination)
+    implementation(libs.androidx.camera.core)
+    implementation(libs.camera.camera2)
+    implementation(libs.camera.lifecycle)
+    implementation(libs.camera.view)
+
+    //Object Detector
+    implementation(libs.tensorflow.lite.gpu)
+    implementation(libs.tensorflow.lite.task.vision)
+    //Includes libs.litert.api
+    implementation(libs.tensorflow.lite.api) {
+        exclude(group = "org.tensorflow", module = "tensorflow-lite-support")
+    }
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite.metadata)
+    //yolov9
+    implementation(libs.tensorflow.lite.gpu.delegate.plugin)
+    implementation(libs.tensorflow.lite.gpu.api)
+
 }
 
 fun readProperties(key: String): String {
@@ -140,5 +172,11 @@ tasks.withType(Test::class) {
     configure<JacocoTaskExtension> {
         isIncludeNoLocationClasses = true
         excludes = listOf("jdk.internal.*")
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        force("org.tensorflow:tensorflow-lite-support:0.4.4")
     }
 }

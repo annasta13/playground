@@ -5,4 +5,5 @@ object RouteParam {
     const val REFRESH = "refresh"
     const val MIN_DATE = "min_date"
     const val STOCK = "stock"
+    const val MODEL = "model"
 }
