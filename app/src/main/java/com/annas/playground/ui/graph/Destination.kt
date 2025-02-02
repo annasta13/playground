@@ -1,6 +1,7 @@
 package com.annas.playground.ui.graph
 
 import com.annas.playground.ui.graph.RouteParam.MIN_DATE
+import com.annas.playground.ui.graph.RouteParam.MODEL
 import com.annas.playground.ui.graph.RouteParam.PRODUCT_ID
 import com.annas.playground.ui.graph.RouteParam.STOCK
 
@@ -17,6 +18,9 @@ object Destination {
     const val LOADING_ANIMATION = "loading-animation-screen"
     const val JUMPING_GAME = "jumping-game-screen"
     const val SCAN_IMAGE_TEXT = "scan-image-text-screen"
+    const val OBJECT_DETECTOR = "object-detector-screen"
+    const val TENSORFLOW_DETECTOR = "tensorflow-detector-screen/{$MODEL}"
+    const val YOLO_DETECTOR = "yolo-detector-screen"
 }
 
 data class Section(
@@ -24,7 +28,7 @@ data class Section(
 ) {
     companion object {
         val sectionList = listOf(
-            Section(1, "Search", route = Destination.SEARCH_SCREEN),
+            Section(1, "Search Indonesian City", route = Destination.SEARCH_SCREEN),
             Section(2, "Data Processing", route = Destination.PRODUCT_LIST),
             Section(3, "Heart Beat Animation", route = Destination.ANIMATION),
             Section(4, "Api Fetching", route = Destination.USER_LIST),
@@ -32,6 +36,7 @@ data class Section(
             Section(6, "Loading Animation", route = Destination.LOADING_ANIMATION),
             Section(7, "Jumping Game", route = Destination.JUMPING_GAME),
             Section(8, "Scan Image Text", route = Destination.SCAN_IMAGE_TEXT),
+            Section(9, "Object Detector", route = Destination.OBJECT_DETECTOR)
         )
     }
 }

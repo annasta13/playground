@@ -24,6 +24,10 @@ composeHiltNavigation = "1.2.0"
 mockitoKotlin = "5.4.0"
 room = "2.6.1"
 composeCoil = "2.4.0"
+tensorflowLiteGpu = "2.13.0"
+tensorflowLiteGpuApi = "2.16.1"
+tensorflowLiteGpuDelegatePlugin = "0.4.4"
+tensorflowLiteTaskVision = "0.4.4"
 timber = "5.0.1"
 workRuntime = "2.9.0"
 pagingComposeAndroid = "3.3.0"
@@ -34,6 +38,7 @@ pagingTesting = "3.3.0"
 paging = "3.3.0"
 coroutineTest = "1.8.1"
 detekt = "1.23.1"
+undercouch = "4.1.2"
 kover = "0.7.3"
 jacoco = "0.8.11"
 securityCrypto = "1.0.0"
@@ -42,6 +47,14 @@ gmsService = "4.4.2"
 visionCommon = "17.3.0"
 playServicesMlkitTextRecognitionCommon = "19.1.0"
 playServicesMlkitTextRecognition = "19.0.1"
+cameraCore = "1.4.1"
+cameraMlkitVision = "1.4.1"
+camerax = "1.4.1"
+tensorflowLiteSupport = "0.1.0"
+tensorflowLiteMetadata = "0.1.0"
+tensorflowLiteApi = "2.9.0"
+coordinatorlayout = "1.2.0"
+litertApi = "1.0.1"
 
 [libraries]
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwiperefresh" }
@@ -66,6 +79,12 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 mlkit-document-scanner = { group = "com.google.android.gms", name = "play-services-mlkit-document-scanner", version.ref = "mlkitDocumentScanner" }
 
+# Camera
+camera-camera2 = { group = "androidx.camera", name = "camera-camera2", version.ref = "camerax" }
+camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "camerax" }
+camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "camerax" }
+androidx-camera-core = { group = "androidx.camera", name = "camera-core", version.ref = "cameraCore" }
+
 # room
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
 landscapist-glide = { module = "com.github.skydoves:landscapist-glide", version.ref = "landscapistGlide" }
@@ -87,6 +106,14 @@ compose-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-com
 compose-coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "composeCoil" }
 compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation" }
 
+tensorflow-lite-api = { module = "org.tensorflow:tensorflow-lite", version.ref = "tensorflowLiteApi" }
+tensorflow-lite-gpu = { module = "org.tensorflow:tensorflow-lite-gpu", version.ref = "tensorflowLiteGpu" }
+tensorflow-lite-gpu-api = { module = "org.tensorflow:tensorflow-lite-gpu-api", version.ref = "tensorflowLiteGpuApi" }
+tensorflow-lite-gpu-delegate-plugin = { module = "org.tensorflow:tensorflow-lite-gpu-delegate-plugin", version.ref = "tensorflowLiteGpuDelegatePlugin" }
+tensorflow-lite-task-vision = { module = "org.tensorflow:tensorflow-lite-task-vision", version.ref = "tensorflowLiteTaskVision" }
+tensorflow-lite-support = { group = "org.tensorflow", name = "tensorflow-lite-support", version.ref = "tensorflowLiteSupport" }
+tensorflow-lite-metadata = { group = "org.tensorflow", name = "tensorflow-lite-metadata", version.ref = "tensorflowLiteMetadata" }
+
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 androidx-paging-compose-android = { group = "androidx.paging", name = "paging-compose-android", version.ref = "pagingComposeAndroid" }
 androidx-pagination = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
@@ -105,6 +132,9 @@ androidx-security-crypto-ktx = { group = "androidx.security", name = "security-c
 vision-common = { group = "com.google.mlkit", name = "vision-common", version.ref = "visionCommon" }
 play-services-mlkit-text-recognition-common = { group = "com.google.android.gms", name = "play-services-mlkit-text-recognition-common", version.ref = "playServicesMlkitTextRecognitionCommon" }
 play-services-mlkit-text-recognition = { group = "com.google.android.gms", name = "play-services-mlkit-text-recognition", version.ref = "playServicesMlkitTextRecognition" }
+androidx-coordinatorlayout = { group = "androidx.coordinatorlayout", name = "coordinatorlayout", version.ref = "coordinatorlayout" }
+litert-api = { group = "com.google.ai.edge.litert", name = "litert-api", version.ref = "litertApi" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -114,5 +144,7 @@ kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-compose = { id = 'org.jetbrains.kotlin.plugin.compose', version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+de-undercouch-download = { id = "de.undercouch.download", version.ref = "undercouch" }
+
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 gms-service = { id = "com.google.gms.google-services", version.ref = "gmsService" }
