@@ -1,11 +1,11 @@
 package com.annas.playground.ui.ui.screen.search
 
-import com.annas.playground.data.domain.usecase.getcity.GetCityUseCase
-import com.annas.playground.data.domain.usecase.getcity.GetCityUseCaseImpl
-import com.annas.playground.data.repository.city.CityRepository
-import com.annas.playground.data.repository.city.CityRepositoryImpl
+import com.annas.playground.kotlin.data.domain.usecase.getcity.GetCityUseCase
+import com.annas.playground.kotlin.data.domain.usecase.getcity.GetCityUseCaseImpl
+import com.annas.playground.kotlin.data.repository.city.CityRepository
+import com.annas.playground.kotlin.data.repository.city.CityRepositoryImpl
 import com.annas.playground.ui.helper.BaseTest
-import com.annas.playground.ui.screen.search.SearchViewModel
+import com.annas.playground.kotlin.ui.screen.search.SearchViewModel
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test

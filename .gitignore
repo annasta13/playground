@@ -15,9 +15,11 @@
 local.properties
 /.idea
 .apk
+/buildSrc/build/
 /buildSrc/build/kotlin
 /buildSrc/build/kotlin/compileKotlin/local-state
 /buildSrc/build/classes
 /buildSrc/build/resources
 /buildSrc/build/libs
 /buildSrc/build/tmp
+/.kotlin/errors/

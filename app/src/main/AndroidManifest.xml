@@ -3,15 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-feature
+        android:name="android.hardware.camera.ar"
+        android:required="true" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
 
     <application
-        android:name=".App"
+        android:name=".kotlin.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -23,7 +25,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".kotlin.ui.screen.arcore.ArCoreActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:exported="false" />
+        <activity
+            android:name=".kotlin.ui.activity.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Starting">
             <intent-filter>
@@ -31,11 +37,22 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <property
+                android:name="android.window.PROPERTY_XR_ACTIVITY_START_MODE"
+                android:value="XR_ACTIVITY_START_MODE_FULL_SPACE_MANAGED" />
         </activity>
+        <activity
+            android:name=".kotlin.ui.screen.arcore.HelloArActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
 
         <meta-data
+            android:name="com.google.ar.core"
+            android:value="required" />
+        <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
-            android:value="ocr"/>
+            android:value="ocr" />
     </application>
 
 </manifest>

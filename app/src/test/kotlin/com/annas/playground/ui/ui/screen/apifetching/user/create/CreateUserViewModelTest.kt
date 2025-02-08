@@ -1,14 +1,14 @@
 package com.annas.playground.ui.ui.screen.apifetching.user.create
 
-import com.annas.playground.data.domain.usecase.postuser.PostUserUseCase
-import com.annas.playground.data.domain.usecase.postuser.PostUserUseCaseImpl
-import com.annas.playground.data.remote.builder.ApiService
-import com.annas.playground.data.remote.model.UserRequest
-import com.annas.playground.data.remote.model.UserResponse
-import com.annas.playground.data.repository.user.UserRepository
-import com.annas.playground.data.repository.user.UserRepositoryImpl
+import com.annas.playground.kotlin.data.domain.usecase.postuser.PostUserUseCase
+import com.annas.playground.kotlin.data.domain.usecase.postuser.PostUserUseCaseImpl
+import com.annas.playground.kotlin.data.remote.builder.ApiService
+import com.annas.playground.kotlin.data.remote.model.UserRequest
+import com.annas.playground.kotlin.data.remote.model.UserResponse
+import com.annas.playground.kotlin.data.repository.user.UserRepository
+import com.annas.playground.kotlin.data.repository.user.UserRepositoryImpl
 import com.annas.playground.ui.helper.BaseTest
-import com.annas.playground.ui.screen.apifetching.user.create.CreateUserViewModel
+import com.annas.playground.kotlin.ui.screen.apifetching.user.create.CreateUserViewModel
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test

@@ -1,27 +1,28 @@
 [versions]
 accompanistSwiperefresh = "0.19.0"
-agp = "8.4.1"
-buildTools = "7.2.1"
+agp = "8.4.2"
 appcompat = "1.7.0"
 converterMoshi = "2.9.0"
+core = "1.47.0"
 coreSplashscreen = "1.0.1"
-hamcrestLibrary = "2.2"
-kotlin = "2.0.0"
+guava = "33.0.0-android"
+kotlin = "2.1.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-kotlinGradlePlugin = "2.0.0"
 landscapistGlide = "2.3.6"
-lifecycleRuntimeKtx = "2.8.3"
+lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.0"
-composeBom = "2024.06.00"
-ksp = "2.0.0-1.0.21"
+composeBom = "2025.01.01"
+ksp = "2.0.20-1.0.24"
 hilt = "2.51.1"
 hiltAndroidX = "1.2.0"
-composeNavigation = "2.7.7"
+composeNavigation = "2.8.6"
 composeHiltNavigation = "1.2.0"
+material = "1.12.0"
 mockitoKotlin = "5.4.0"
+javaglObj = "0.4.0"
 room = "2.6.1"
 composeCoil = "2.4.0"
 tensorflowLiteGpu = "2.13.0"
@@ -30,31 +31,26 @@ tensorflowLiteGpuDelegatePlugin = "0.4.4"
 tensorflowLiteTaskVision = "0.4.4"
 timber = "5.0.1"
 workRuntime = "2.9.0"
-pagingComposeAndroid = "3.3.0"
-constraintlayout = "1.0.1"
+pagingComposeAndroid = "3.3.5"
+constraintlayout = "1.1.0"
 truth = "1.1.3"
-mockk = "1.12.0"
-pagingTesting = "3.3.0"
-paging = "3.3.0"
+pagingTesting = "3.3.5"
 coroutineTest = "1.8.1"
 detekt = "1.23.1"
-undercouch = "4.1.2"
-kover = "0.7.3"
-jacoco = "0.8.11"
 securityCrypto = "1.0.0"
 mlkitDocumentScanner = "16.0.0-beta1"
-gmsService = "4.4.2"
 visionCommon = "17.3.0"
 playServicesMlkitTextRecognitionCommon = "19.1.0"
 playServicesMlkitTextRecognition = "19.0.1"
 cameraCore = "1.4.1"
-cameraMlkitVision = "1.4.1"
 camerax = "1.4.1"
-tensorflowLiteSupport = "0.1.0"
+tensorflowLiteSupport = "0.4.4"
 tensorflowLiteMetadata = "0.1.0"
-tensorflowLiteApi = "2.9.0"
+tensorflowLiteApi = "2.13.0"
 coordinatorlayout = "1.2.0"
-litertApi = "1.0.1"
+sceneformUx = "1.17.1"
+activity = "1.9.0"
+constraintlayoutVersion = "2.2.0"
 
 [libraries]
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwiperefresh" }
@@ -63,7 +59,8 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "workRuntime" }
 converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterMoshi" }
-hamcrest-library = { module = "org.hamcrest:hamcrest-library", version.ref = "hamcrestLibrary" }
+arcore = { module = "com.google.ar:core", version.ref = "core" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -77,6 +74,7 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
 mlkit-document-scanner = { group = "com.google.android.gms", name = "play-services-mlkit-document-scanner", version.ref = "mlkitDocumentScanner" }
 
 # Camera
@@ -86,9 +84,9 @@ camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "
 androidx-camera-core = { group = "androidx.camera", name = "camera-core", version.ref = "cameraCore" }
 
 # room
-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
 landscapist-glide = { module = "com.github.skydoves:landscapist-glide", version.ref = "landscapistGlide" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
+javagl-obj = { module = "de.javagl:obj", version.ref = "javaglObj" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
@@ -116,24 +114,20 @@ tensorflow-lite-metadata = { group = "org.tensorflow", name = "tensorflow-lite-m
 
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 androidx-paging-compose-android = { group = "androidx.paging", name = "paging-compose-android", version.ref = "pagingComposeAndroid" }
-androidx-pagination = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
 androidx-constraintlayout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintlayout" }
 
 #test
 test-coroutine = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutineTest" }
-test-coroutine-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test-jvm", version.ref = "coroutineTest" }
 test-truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
-test-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 test-pagination = { group = "androidx.paging", name = "paging-testing", version.ref = "pagingTesting" }
-android-build-tools = { module = "com.android.tools.build:gradle", version.ref = "buildTools" }
-kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-jacoco = { group = "org.jacoco", name = "org.jacoco.core", version.ref = "jacoco" }
 androidx-security-crypto-ktx = { group = "androidx.security", name = "security-crypto", version.ref = "securityCrypto" }
 vision-common = { group = "com.google.mlkit", name = "vision-common", version.ref = "visionCommon" }
 play-services-mlkit-text-recognition-common = { group = "com.google.android.gms", name = "play-services-mlkit-text-recognition-common", version.ref = "playServicesMlkitTextRecognitionCommon" }
 play-services-mlkit-text-recognition = { group = "com.google.android.gms", name = "play-services-mlkit-text-recognition", version.ref = "playServicesMlkitTextRecognition" }
 androidx-coordinatorlayout = { group = "androidx.coordinatorlayout", name = "coordinatorlayout", version.ref = "coordinatorlayout" }
-litert-api = { group = "com.google.ai.edge.litert", name = "litert-api", version.ref = "litertApi" }
+sceneform-ux = { group = "com.google.ar.sceneform.ux", name = "sceneform-ux", version.ref = "sceneformUx" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayoutVersion" }
 
 
 [plugins]
@@ -144,7 +138,3 @@ kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-compose = { id = 'org.jetbrains.kotlin.plugin.compose', version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-de-undercouch-download = { id = "de.undercouch.download", version.ref = "undercouch" }
-
-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
-gms-service = { id = "com.google.gms.google-services", version.ref = "gmsService" }

@@ -50,4 +50,23 @@
     <string name="app_not_ready">App not ready</string>
     <string name="object_detector">Object Detector</string>
     <string name="select_model">Select Model</string>
+    <!--ARCORE    -->
+    <string name="arcore">ARCore</string>
+    <string name="depth_use_explanation" translatable="false">When Depth is enabled on supported devices, virtual objects adapt to the environment by blending in with the real world.</string>
+    <string name="button_text_enable_depth" translatable="false">Enable</string>
+    <string name="button_text_disable_depth" translatable="false">Disable</string>
+    <string name="options_title_with_depth" translatable="false">Your device supports depth</string>
+    <string name="options_title_without_depth" translatable="false">Your device does not support depth</string>
+    <string name="done" translatable="false">Done</string>
+    <string-array name="depth_options_array" translatable="false">
+        <item>Enable depth</item>
+        <item>Show depth map</item>
+    </string-array>
+    <string name="options_title_instant_placement" translatable="false">Instant Placement options</string>
+    <string-array name="instant_placement_options_array" translatable="false">
+        <item>Enable Instant Placement</item>
+    </string-array>
+
+    <string name="searching_planes" translatable="false">Searching for surfaces...</string>
+    <string name="waiting_taps" translatable="false">Tap on a surface to place an object.</string>
 </resources>

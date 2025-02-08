@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.detekt)
-    id ("kotlin-kapt")
+    id("kotlin-kapt")
     id("download-tasks")
     jacoco
 }
@@ -103,7 +103,9 @@ dependencies {
     implementation(libs.play.services.mlkit.text.recognition.common)
     implementation(libs.play.services.mlkit.text.recognition)
     implementation(libs.androidx.coordinatorlayout)
-
+    implementation(libs.sceneform.ux)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -143,20 +145,25 @@ dependencies {
     implementation(libs.camera.camera2)
     implementation(libs.camera.lifecycle)
     implementation(libs.camera.view)
+    implementation (libs.guava)
 
     //Object Detector
-    implementation(libs.tensorflow.lite.gpu)
-    implementation(libs.tensorflow.lite.task.vision)
-    //Includes libs.litert.api
-    implementation(libs.tensorflow.lite.api) {
-        exclude(group = "org.tensorflow", module = "tensorflow-lite-support")
+    implementation(libs.tensorflow.lite.gpu){
+        exclude(group = "org.tensorflow.lite", module = "tensorflow-lite-api")
     }
+    implementation(libs.tensorflow.lite.task.vision)
+    implementation(libs.tensorflow.lite.api)
     implementation(libs.tensorflow.lite.support)
-    implementation(libs.tensorflow.lite.metadata)
+
     //yolov9
     implementation(libs.tensorflow.lite.gpu.delegate.plugin)
     implementation(libs.tensorflow.lite.gpu.api)
+    implementation(libs.arcore)
 
+    //ARCore
+    implementation (libs.javagl.obj)
+    implementation (libs.material)
+    implementation("com.google.ar.sceneform:core:1.15.0")
 }
 
 fun readProperties(key: String): String {
@@ -177,6 +184,7 @@ tasks.withType(Test::class) {
 
 configurations.all {
     resolutionStrategy {
+        resolutionStrategy.force(libs.androidx.core.ktx)
         force("org.tensorflow:tensorflow-lite-support:0.4.4")
     }
 }

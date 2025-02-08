@@ -1,13 +1,13 @@
 package com.annas.playground.ui.ui.screen.dataprocessing.productlist
 
-import com.annas.playground.data.domain.usecase.getproductlist.GetProductList
-import com.annas.playground.data.domain.usecase.getproductlist.GetProductListImpl
-import com.annas.playground.data.local.dao.ProductDao
-import com.annas.playground.data.repository.product.ProductRepository
-import com.annas.playground.data.repository.product.ProductRepositoryImpl
-import com.annas.playground.helper.DataHelper
+import com.annas.playground.kotlin.data.domain.usecase.getproductlist.GetProductList
+import com.annas.playground.kotlin.data.domain.usecase.getproductlist.GetProductListImpl
+import com.annas.playground.kotlin.data.local.dao.ProductDao
+import com.annas.playground.kotlin.data.repository.product.ProductRepository
+import com.annas.playground.kotlin.data.repository.product.ProductRepositoryImpl
+import com.annas.playground.kotlin.helper.common.DataHelper
 import com.annas.playground.ui.helper.BaseTest
-import com.annas.playground.ui.screen.dataprocessing.productlist.ProductListViewModel
+import com.annas.playground.kotlin.ui.screen.dataprocessing.productlist.ProductListViewModel
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test

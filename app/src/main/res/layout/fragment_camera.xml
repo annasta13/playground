@@ -26,7 +26,7 @@
         android:layout_height="match_parent"
         app:scaleType="fillStart" />
 
-    <com.annas.playground.ui.screen.objectdetector.tensorflow.binding.OverlayView
+    <com.annas.playground.kotlin.ui.screen.objectdetector.tensorflow.binding.OverlayView
         android:id="@+id/overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
