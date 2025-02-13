@@ -15,6 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import coil.compose.AsyncImage
 import com.annas.playground.R
 import com.annas.playground.kotlin.helper.tensorflow.DetectedObject
@@ -44,7 +45,9 @@ fun ImageObjectDetectorView() {
     val objectDetector = remember {
         TensorflowDetectorHelper(
             currentModel = ObjectDetectorType.MODEL_EFFICIENTDET_V2,
-            context = context, listener = listener
+            context = context,
+            listener = listener,
+            maxResults = 8
         )
     }
 
@@ -57,7 +60,7 @@ fun ImageObjectDetectorView() {
             val bitmapSource = remember {
                 BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.sample_detection
+                    R.drawable.img_vehicles
                 )
             }
             LaunchedEffect(Unit) {
@@ -69,12 +72,14 @@ fun ImageObjectDetectorView() {
             AsyncImage(
                 model = bitmapSource,
                 contentDescription = null,
-                modifier = Modifier.constrainAs(imageRef) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    bottom.linkTo(parent.bottom)
-                },//.border(8.dp, Color.Blue),//.fillMaxWidth(),
+                modifier = Modifier
+//                    .fillMaxSize()
+                    .constrainAs(imageRef) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        bottom.linkTo(parent.bottom)
+                    },//.border(8.dp, Color.Blue),//.fillMaxWidth(),
                 contentScale = ContentScale.Fit,
             )
 
@@ -84,9 +89,11 @@ fun ImageObjectDetectorView() {
                     start.linkTo(imageRef.start)
                     end.linkTo(imageRef.end)
                     bottom.linkTo(imageRef.bottom)
+                    height = Dimension.fillToConstraints
+                    width = Dimension.fillToConstraints
                 }
-                .border(8.dp, Color.Red)
-                .fillMaxSize()
+//                .fillMaxSize()
+                .border(2.dp, Color.Red)
                 ,
 
                 detectedObjects = detectedObjects)

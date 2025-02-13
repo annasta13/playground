@@ -27,16 +27,13 @@ fun ImageObjectDetectorOverlayView(
         val canvasHeight = size.height
 
         detectedObjects.forEachIndexed { index, obj ->
-            val scaleFactor = max(
-                canvasWidth / obj.tensorImageWidth.toFloat(),
-                canvasHeight / obj.tensorImageHeight.toFloat()
-            )
-
+            val scaleHeight = canvasHeight * 1f / obj.tensorImageHeight.toFloat()
+            val scaleWidth = canvasWidth * 1f / obj.tensorImageWidth.toFloat()
             val boundingBox = obj.detection.boundingBox
-            val top = boundingBox.top * scaleFactor
-            val bottom = boundingBox.bottom * scaleFactor
-            val left = boundingBox.left * scaleFactor
-            val right = boundingBox.right * scaleFactor
+            val top = boundingBox.top * scaleHeight
+            val bottom = boundingBox.bottom * scaleHeight
+            val left = boundingBox.left * scaleWidth
+            val right = boundingBox.right * scaleWidth
 
             val drawableRect = RectF(left, top, right, bottom)
             val size = Size(drawableRect.width(), drawableRect.height())
