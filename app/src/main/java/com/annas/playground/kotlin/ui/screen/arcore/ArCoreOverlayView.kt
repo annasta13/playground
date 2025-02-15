@@ -69,14 +69,29 @@ class ArCoreOverlayView(context: Context?, attrs: AttributeSet?) : View(context,
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
 
+        //Image Object
+        //check scaleHeight 0.318555 scaleWidth 0.33333334
+        //check scaleHeight 0.318555 scaleWidth 0.31851852
+        ////check canvasHeight 2328.0 canvasWidth 1080.0
+        //check canvasHeight 2328.0 canvasWidth 1032.0
+        //check tensorImage width 480 height 640
+        //check result box RectF(68.0, 333.0, 290.0, 570.0)
+
+
+        //ArCore
+        //check scaleHeight 3.80625 scaleWidth 2.25
+        //check height 2436 width 1080
+        //check tensorImage width 480 height 640
         for (item in results) {
             val result = item.detection
             val boundingBox = result.boundingBox
-
-            val top = boundingBox.top * scaleFactor
-            val bottom = boundingBox.bottom * scaleFactor
-            val left = boundingBox.left * scaleFactor
-            val right = boundingBox.right * scaleFactor
+            val scaleHeight = height * 1f / item.tensorImageHeight.toFloat()
+            val scaleWidth = width * 1f / item.tensorImageWidth.toFloat()
+            println("check height $height width $width")
+            val top = boundingBox.top * scaleHeight
+            val bottom = boundingBox.bottom * scaleHeight
+            val left = boundingBox.left * scaleWidth
+            val right = boundingBox.right * scaleWidth
 
             // Draw bounding box around detected objects
             val drawableRect = RectF(left, top, right, bottom)
@@ -113,7 +128,7 @@ class ArCoreOverlayView(context: Context?, attrs: AttributeSet?) : View(context,
 
         // PreviewView is in FILL_START mode. So we need to scale up the bounding box to match with
         // the size that the captured images will be displayed.
-        scaleFactor = max((width  / imageWidth).toFloat(), (height / imageHeight).toFloat())
+        scaleFactor = max((width / imageWidth).toFloat(), (height / imageHeight).toFloat())
     }
 
     companion object {

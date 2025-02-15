@@ -1,7 +1,6 @@
 package com.annas.playground.kotlin.ui.screen.objectdetector.imageobject
 
 import android.graphics.BitmapFactory
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -10,10 +9,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import coil.compose.AsyncImage
@@ -60,7 +57,7 @@ fun ImageObjectDetectorView() {
             val bitmapSource = remember {
                 BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.img_vehicles
+                    R.drawable.sample_detection
                 )
             }
             LaunchedEffect(Unit) {
@@ -83,20 +80,18 @@ fun ImageObjectDetectorView() {
                 contentScale = ContentScale.Fit,
             )
 
-            ImageObjectDetectorOverlayView(modifier = Modifier
-                .constrainAs(overlayRef) {
-                    top.linkTo(imageRef.top)
-                    start.linkTo(imageRef.start)
-                    end.linkTo(imageRef.end)
-                    bottom.linkTo(imageRef.bottom)
-                    height = Dimension.fillToConstraints
-                    width = Dimension.fillToConstraints
-                }
-//                .fillMaxSize()
-                .border(2.dp, Color.Red)
-                ,
-
-                detectedObjects = detectedObjects)
+            ImageObjectDetectorOverlayView(
+                modifier = Modifier
+                    .constrainAs(overlayRef) {
+                        top.linkTo(imageRef.top)
+                        start.linkTo(imageRef.start)
+                        end.linkTo(imageRef.end)
+                        bottom.linkTo(imageRef.bottom)
+                        height = Dimension.fillToConstraints
+                        width = Dimension.fillToConstraints
+                    },
+                detectedObjects = detectedObjects
+            )
         }
     }
 }

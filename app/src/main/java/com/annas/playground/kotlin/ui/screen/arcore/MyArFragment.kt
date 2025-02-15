@@ -1,16 +1,12 @@
 package com.annas.playground.kotlin.ui.screen.arcore
 
 import android.content.Context
-import android.util.Log
-import android.util.Size
-import com.google.ar.core.CameraConfig
-import com.google.ar.core.CameraConfigFilter
 import com.google.ar.core.Config
 import com.google.ar.core.Session
 import com.google.ar.sceneform.ux.ArFragment
 
 
-//https://stackoverflow.com/questions/50402476/the-best-practice-to-integrate-arfragment-sceneform-with-existing-fragment-app
+// https://stackoverflow.com/questions/50402476/the-best-practice-to-integrate-arfragment-sceneform-with-existing-fragment-app
 class MyArFragment : ArFragment() {
     interface OnCompleteListener {
         fun onComplete()
@@ -19,7 +15,7 @@ class MyArFragment : ArFragment() {
     private var mListener: OnCompleteListener? = null
 
     override fun onAttach(context: Context) {
-        super.onAttach(context);
+        super.onAttach(context)
         kotlin.runCatching {
             this.mListener = context as OnCompleteListener
         }.onFailure {

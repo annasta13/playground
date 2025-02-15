@@ -13,7 +13,6 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
 import com.annas.playground.kotlin.helper.tensorflow.DetectedObject
 import java.util.Locale
-import kotlin.math.max
 
 
 @Suppress("MagicNumber")
@@ -29,6 +28,7 @@ fun ImageObjectDetectorOverlayView(
         detectedObjects.forEachIndexed { index, obj ->
             val scaleHeight = canvasHeight * 1f / obj.tensorImageHeight.toFloat()
             val scaleWidth = canvasWidth * 1f / obj.tensorImageWidth.toFloat()
+            println("check canvasHeight $canvasHeight canvasWidth $canvasWidth")
             val boundingBox = obj.detection.boundingBox
             val top = boundingBox.top * scaleHeight
             val bottom = boundingBox.bottom * scaleHeight

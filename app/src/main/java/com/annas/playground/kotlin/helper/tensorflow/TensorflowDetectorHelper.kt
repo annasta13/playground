@@ -9,7 +9,11 @@ import android.graphics.Rect
 import android.graphics.YuvImage
 import android.hardware.display.DisplayManager
 import android.media.Image
+import android.os.Handler
+import android.os.Looper
+import android.view.PixelCopy
 import android.view.Surface
+import android.view.SurfaceView
 import androidx.camera.core.ImageProxy
 import com.annas.playground.kotlin.helper.tensorflow.ObjectDetectorType.Companion.MODEL_EFFICIENTDET_V0
 import com.annas.playground.kotlin.helper.tensorflow.ObjectDetectorType.Companion.MODEL_EFFICIENTDET_V1
@@ -23,8 +27,6 @@ import org.tensorflow.lite.task.core.BaseOptions
 import org.tensorflow.lite.task.vision.detector.Detection
 import org.tensorflow.lite.task.vision.detector.ObjectDetector
 import java.io.ByteArrayOutputStream
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
 
 
 data class DetectedObject(
@@ -113,6 +115,7 @@ class TensorflowDetectorHelper(
         }
     }
 
+    /** Use in CameraX*/
     fun detect(imageProxy: ImageProxy, previousInferenceTime: Long? = null) {
         if (objectDetector == null) {
             setupObjectDetector()
@@ -120,15 +123,10 @@ class TensorflowDetectorHelper(
 
         val currentTimestamp = System.currentTimeMillis()
         val difference = currentTimestamp - (previousInferenceTime ?: 0L)
-        val shouldDetect = difference > 1000 || previousInferenceTime == 0L
-
-        println("check currentTimestamp: $currentTimestamp previousInferenceTime: $previousInferenceTime shouldDetect: $shouldDetect")
+        val shouldDetect = difference > DETECTION_INTERVAL || previousInferenceTime == 0L
 
         if (shouldDetect.not()) {
-//            runBlocking {
-//                delay(1000)
             imageProxy.close()
-//            }
             return
         }
 
@@ -144,8 +142,7 @@ class TensorflowDetectorHelper(
         val imageRotation = imageProxy.imageInfo.rotationDegrees
 
         // Create preprocessor for the image.
-        // See https://www.tensorflow.org/lite/inference_with_metadata/
-        //            lite_support#imageprocessor_architecture
+        // See https://www.tensorflow.org/lite/inference_with_metadata/lite_support#imageprocessor_architecture
         val imageProcessor =
             ImageProcessor.Builder()
                 .add(Rot90Op(-imageRotation / ROTATION))
@@ -154,10 +151,7 @@ class TensorflowDetectorHelper(
         // Preprocess the image and convert it into a TensorImage for detection.
         val tensorImage = imageProcessor.process(TensorImage.fromBitmap(bitmapBuffer))
         val results = objectDetector?.detect(tensorImage)
-        results?.firstOrNull()?.let {
-            println("check tensorImage width ${tensorImage.width} height ${tensorImage.height}")
-            println("check result box ${it.boundingBox}")
-        }
+
         listener?.onResults(
             results?.map {
                 DetectedObject(
@@ -195,56 +189,40 @@ class TensorflowDetectorHelper(
         )
     }
 
-    private val imageProcessor =
-        ImageProcessor.Builder()
-            .build()
+    private val handler = Handler(Looper.getMainLooper())
 
-    fun detectImage(image: Image, imageRotation: Int) {
+    fun detectImage(image: Image, imageRotation: Int, surfaceView: SurfaceView) {
         if (objectDetector == null) {
             setupObjectDetector()
         }
 
         val matrix = Matrix()
-//        val modelInputSize = 320
-        val bitmap = imageToBitmap(image)
+        val bitmap = convertToBitmapByGemini(image)
         matrix.postRotate(imageRotation.toFloat())
-        val bitmapResult =
-            Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+        val bitmapResult = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
         val mat = Matrix()
         val rotation = getRotation(context) // Get rotation from Display
         mat.postRotate(-rotation.toFloat())
-        val imageProcessor =
-            ImageProcessor.Builder()
-//                .add(Rot90Op(-rotation / ROTATION))
-                .build()
+        PixelCopy.request(surfaceView, bitmapResult, { result ->
+            println("check result == PixelCopy.SUCCESS ${result == PixelCopy.SUCCESS}")
+            if (result == PixelCopy.SUCCESS) {
+                val imageProcessor = ImageProcessor.Builder().build()
 
-        val imageTensor = TensorImage.fromBitmap(bitmapResult)
-        val tensorImage = imageProcessor.process(imageTensor)
-        val results = objectDetector?.detect(tensorImage)
-
-
-        //CameraX
-        //check result box RectF(17.0, 419.0, 279.0, 626.0)
-        //check currentTimestamp: 1739359915931 previousInferenceTime: null shouldDetect: true
-        //check tensorImage width 480 height 640
-        //check result box RectF(1.0, 423.0, 297.0, 632.0)
-        results?.firstOrNull()?.let {
-            println("check tensorImage width ${tensorImage.width} height ${tensorImage.height}")
-            println("check result box ${it.boundingBox}")
-        }
-
-        listener?.onResults(
-            results?.map {
-                DetectedObject(
-                    detection = it,
-                    inferenceTime = System.currentTimeMillis(),
-                    tensorImageWidth = tensorImage.width,
-                    tensorImageHeight = tensorImage.height
+                val imageTensor = TensorImage.fromBitmap(bitmapResult)
+                val tensorImage = imageProcessor.process(imageTensor)
+                val results = objectDetector?.detect(tensorImage)
+                listener?.onResults(
+                    results?.map {
+                        DetectedObject(
+                            detection = it,
+                            inferenceTime = System.currentTimeMillis(),
+                            tensorImageWidth = tensorImage.width,
+                            tensorImageHeight = tensorImage.height
+                        )
+                    }.orEmpty()
                 )
-            }.orEmpty()
-        )
-        bitmap.recycle()
-        bitmapResult.recycle()
+            }
+        }, handler)
     }
 
     fun convertToBitmapByGemini(image: Image): Bitmap {
@@ -265,70 +243,12 @@ class TensorflowDetectorHelper(
             val yuvImage = YuvImage(nv21, ImageFormat.NV21, width, height, null)
             val out = ByteArrayOutputStream()
             val rect = Rect(0, 0, width, height) // Create a Rect with the image dimensions
-            yuvImage.compressToJpeg(rect, 100, out) // Quality 100
+            yuvImage.compressToJpeg(rect, IMAGE_QUALITY, out) // Quality 100
             val imageBytes = out.toByteArray()
             return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
         }
     }
 
-    fun bitmapToByteBuffer(bitmap: Bitmap): ByteBuffer {
-        val byteBuffer =
-            ByteBuffer.allocateDirect(4 * bitmap.width * bitmap.height * 3) // 4 bytes per float, 3 channels (RGB)
-        byteBuffer.order(ByteOrder.nativeOrder())
-
-        val pixels = IntArray(bitmap.width * bitmap.height)
-        bitmap.getPixels(pixels, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
-
-        var pixel = 0
-        for (i in 0 until bitmap.width) {
-            for (j in 0 until bitmap.height) {
-                val `val` = pixels[pixel++]
-                byteBuffer.putFloat(((`val` shr 16 and 0xFF) - 127) / 128f)
-                byteBuffer.putFloat(((`val` shr 8 and 0xFF) - 127) / 128f)
-                byteBuffer.putFloat(((`val` and 0xFF) - 127) / 128f)
-            }
-        }
-        byteBuffer.rewind()
-        return byteBuffer
-    }
-
-    private fun toBitmap(image: Image): Bitmap {
-        val planes = image.planes
-        val buffer = planes[0].buffer
-        val pixelStride = planes[0].pixelStride
-        val rowStride = planes[0].rowStride
-        val rowPadding = rowStride - pixelStride * image.width
-        val bitmap = Bitmap.createBitmap(
-            image.width + rowPadding / pixelStride,
-            image.height, Bitmap.Config.ARGB_8888
-        )
-        bitmap.copyPixelsFromBuffer(buffer)
-        return bitmap
-    }
-
-//    private fun imageToBitmap(image: Image, modelInputSize: Int): Bitmap {
-//        val yBuffer = image.planes[0].buffer
-//        val uBuffer = image.planes[1].buffer
-//        val vBuffer = image.planes[2].buffer
-//
-//        val ySize = yBuffer.remaining()
-//        val uSize = uBuffer.remaining()
-//        val vSize = vBuffer.remaining()
-//
-//        val nv21 = ByteArray(ySize + uSize + vSize)
-//        yBuffer.get(nv21, 0, ySize)
-//        vBuffer.get(nv21, ySize, vSize)
-//        uBuffer.get(nv21, ySize + vSize, uSize)
-//
-//        val yuvImage = YuvImage(nv21, ImageFormat.NV21, image.width, image.height, null)
-//        val out = ByteArrayOutputStream()
-//        yuvImage.compressToJpeg(Rect(0, 0, image.width, image.height), 100, out)
-//
-//        val jpegBytes = out.toByteArray()
-//        val bitmap = BitmapFactory.decodeByteArray(jpegBytes, 0, jpegBytes.size)
-//
-//        return Bitmap.createScaledBitmap(bitmap, modelInputSize, modelInputSize, true)
-//    }
     fun imageToBitmap(image: Image): Bitmap {
         val yBuffer = image.planes[0].buffer
         val uvBuffer = image.planes[1].buffer
@@ -341,13 +261,13 @@ class TensorflowDetectorHelper(
 
         val yuvImage = YuvImage(nv21, ImageFormat.NV21, image.width, image.height, null)
         val outputStream = ByteArrayOutputStream()
-        yuvImage.compressToJpeg(Rect(0, 0, image.width, image.height), 100, outputStream)
+        yuvImage.compressToJpeg(Rect(0, 0, image.width, image.height), IMAGE_QUALITY, outputStream)
 
         val jpegArray = outputStream.toByteArray()
         return BitmapFactory.decodeByteArray(jpegArray, 0, jpegArray.size)
     }
 
-    fun getRotation(context: Context): Int {
+    private fun getRotation(context: Context): Int {
         val displayManager = context.getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
         val display = displayManager.getDisplay(android.view.Display.DEFAULT_DISPLAY)
         return display?.rotation ?: Surface.ROTATION_0
@@ -362,6 +282,8 @@ class TensorflowDetectorHelper(
         const val DELEGATE_CPU = 0
         const val DELEGATE_GPU = 1
         const val DELEGATE_NNAPI = 2
+        const val IMAGE_QUALITY = 100
+        const val DETECTION_INTERVAL = 1000
         const val ROTATION = 90
     }
 }

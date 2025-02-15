@@ -28,14 +28,18 @@ import com.google.ar.core.Anchor
 import com.google.ar.core.Pose
 import com.google.ar.core.TrackingState
 import com.google.ar.sceneform.AnchorNode
+import com.google.ar.sceneform.ArSceneView
+import com.google.ar.sceneform.FrameTime
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.MaterialFactory
 import com.google.ar.sceneform.rendering.ShapeFactory
 import com.google.ar.sceneform.ux.TransformableNode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.math.atan
 
 
+@Suppress("TooManyFunctions", "unused","ReturnCount","MagicNumber")
 class ArCoreActivity : AppCompatActivity(), MyArFragment.OnCompleteListener {
     private lateinit var binding: ActivityArCoreBinding
     private lateinit var cameraPermissionLauncher: ActivityResultLauncher<String>
@@ -68,44 +72,45 @@ class ArCoreActivity : AppCompatActivity(), MyArFragment.OnCompleteListener {
 
     }
 
-
     private fun observeObject() {
         arFragment.arSceneView.scene.addOnUpdateListener { frameTime ->
-            arFragment.onUpdate(frameTime)
-
             val currentTime = System.currentTimeMillis()
-//  }
 
-            if (currentTime - lastDetectionTime > MISS_TOLERANCE) {
+           /* if (currentTime - lastDetectionTime > MISS_TOLERANCE) {
                 detectedObject = null
                 lastDetectionTime = currentTime + WARM_UP_TOLERANCE // Set future time to pause detection
                 return@addOnUpdateListener
-            }
+            }*/
 
             // If in warm-up period, don't detect yet
-//            println("check object detection currentTime < lastDetectionTime ${currentTime < lastDetectionTime}")
             if (currentTime < lastDetectionTime) return@addOnUpdateListener
 
             // Run detection only if 1 second has passed since last detection
-//            println("check object detection currentTime - lastDetectionTime < WARM_UP_TOLERANCE ${currentTime - lastDetectionTime < WARM_UP_TOLERANCE}")
             if (currentTime - lastDetectionTime < WARM_UP_TOLERANCE) return@addOnUpdateListener
 
-            lifecycleScope.launch(Dispatchers.IO) {
-                val frame = arFragment.arSceneView.arFrame ?: return@launch
-                lastDetectionTime = currentTime
+            detectObject(currentTime, frameTime)
+        }
+    }
 
-                kotlin.runCatching {
-                    val image = frame.acquireCameraImage()
-                    val imageRotation = when (frame.camera.trackingState) {
-                        TrackingState.TRACKING -> 90   // Most devices need +90° correction
-                        else -> 0
-                    }
-                    objectDetector.detectImage(image, imageRotation)
-                    image.close()
-                    lastDetectionTime = System.currentTimeMillis() // Update last detection time
-                }.onFailure {
-                    println("check addOnUpdateListener error ${it.message}")
+
+    private fun detectObject(currentTime: Long, frameTime: FrameTime) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val frame = arFragment.arSceneView.arFrame ?: return@launch
+            if (currentTime - (arFragment.arSceneView.arFrame?.timestamp ?: 0L) < 100_000_000) {
+                arFragment.onUpdate(frameTime)
+            }
+            lastDetectionTime = currentTime
+            kotlin.runCatching {
+                val image = frame.acquireCameraImage()
+                val imageRotation = when (frame.camera.trackingState) {
+                    TrackingState.TRACKING -> 90   // Most devices need +90° correction
+                    else -> 0
                 }
+                objectDetector.detectImage(image, imageRotation, arFragment.arSceneView)
+                image.close()
+                lastDetectionTime = System.currentTimeMillis() // Update last detection time
+            }.onFailure {
+                println("check addOnUpdateListener error ${it.message}")
             }
         }
     }
@@ -133,8 +138,7 @@ class ArCoreActivity : AppCompatActivity(), MyArFragment.OnCompleteListener {
         objectDetector = TensorflowDetectorHelper(
             context = this@ArCoreActivity,
             listener = listener,
-            maxResults = 1,
-            currentModel = ObjectDetectorType.MODEL_EFFICIENTDET_V2
+            maxResults = 1
         )
     }
 
@@ -165,52 +169,85 @@ class ArCoreActivity : AppCompatActivity(), MyArFragment.OnCompleteListener {
 
 
     fun placeARObjectFromDetection(detectedX: Float, detectedY: Float) {
-        println("check placeARObjectFromDetection")
         val frame = arFragment.arSceneView.arFrame ?: return
         val camera = frame.camera
         val hitResult = frame.hitTest(detectedX, detectedY).firstOrNull()
         if (hitResult != null) {
-            val anchor = hitResult.createAnchor()
-            placeARObject(anchor)
+            detectedObject?.detection?.apply {
+                val anchor = hitResult.createAnchor()
+                placeARObject(anchor)
+            }
         } else {
             println("check No AR surface, placing object in front of camera")
             val position = camera.pose.compose(Pose.makeTranslation(0f, 0f, -1f)) // 1m in front
             val anchor = arFragment.arSceneView.session?.createAnchor(position)
-            println("check anchor $anchor")
             anchor?.let { placeARObject(it) }
         }
     }
 
+
     private fun placeARObject(anchor: Anchor) {
         runOnUiThread {
             removePlacedObject()
-            MaterialFactory.makeOpaqueWithColor(
-                this,
-                com.google.ar.sceneform.rendering.Color(Color.GREEN)
-            )
-                .thenAccept { material ->
-                    println("check placeARObject thenAccept")
-                    val arrowhead = ShapeFactory.makeSphere(
-                        0.05f,  // Arrowhead base radius
-                        Vector3.zero(),   // Arrowhead height
-                        MaterialFactory.makeOpaqueWithColor(
-                            this, com.google.ar.sceneform.rendering.Color(Color.RED)
-                        ).get()
-                    )
-                    val anchorNode = AnchorNode(anchor)
-                    anchorNode.setParent(arFragment.arSceneView.scene)
-
-                    val transformableNode = TransformableNode(arFragment.transformationSystem)
-                    transformableNode.setParent(anchorNode)
-                    transformableNode.renderable = arrowhead
-                    transformableNode.select()
-                    placedAnchorNode = anchorNode
-                }
-                .exceptionally {
-                    println("check Failed to load 3D model: ${it.message}")
-                    null
-                }
+            placeSphere(anchor)
         }
+    }
+
+    private fun placeSphere(anchor: Anchor) {
+        MaterialFactory.makeOpaqueWithColor(
+            this@ArCoreActivity,
+            com.google.ar.sceneform.rendering.Color(Color.GREEN)
+        )
+            .thenAccept { material ->
+                val arrowhead = ShapeFactory.makeSphere(
+                    0.05f,
+                    Vector3.zero(),   // Arrowhead height
+                    MaterialFactory.makeOpaqueWithColor(
+                        this@ArCoreActivity, com.google.ar.sceneform.rendering.Color(Color.RED)
+                    ).get()
+                )
+                val anchorNode = AnchorNode(anchor)
+                anchorNode.setParent(arFragment.arSceneView.scene)
+
+                val transformableNode = TransformableNode(arFragment.transformationSystem)
+                transformableNode.setParent(anchorNode)
+                transformableNode.renderable = arrowhead
+                transformableNode.select()
+                placedAnchorNode = anchorNode
+            }
+    }
+
+    private fun placeCube(anchor: Anchor) {
+        MaterialFactory.makeOpaqueWithColor(
+            this@ArCoreActivity,
+            com.google.ar.sceneform.rendering.Color(Color.BLUE)
+        )
+            .thenAccept { material ->
+                val cubeRenderable = ShapeFactory.makeCube(
+                    Vector3(
+                      0.1f,
+                      0.1f,
+                        0.1f
+                    ), // Width, height, and depth
+                    Vector3(0f, 0f, 0f), // Center of the cube
+                    material
+                )
+
+                val anchorNode = AnchorNode(anchor)
+                anchorNode.setParent(arFragment.arSceneView.scene)
+
+                val transformableNode = TransformableNode(arFragment.transformationSystem)
+                transformableNode.setParent(anchorNode)
+                transformableNode.renderable = cubeRenderable
+                transformableNode.select()
+                placedAnchorNode = anchorNode
+            }
+    }
+
+    private fun computeFov(imageSize: Int, focalLength: Float): Float {
+        val x = imageSize / (2.0 * focalLength)
+        val value = Math.toDegrees(2 * atan(x))
+        return value.toFloat()
     }
 
     private fun removePlacedObject() {
@@ -220,6 +257,19 @@ class ArCoreActivity : AppCompatActivity(), MyArFragment.OnCompleteListener {
             it.setParent(null)
             placedAnchorNode = null
         }
+    }
+
+    private fun getRealWorld(arSceneView: ArSceneView): Pair<Float, Float>? {
+        val camera = arSceneView.arFrame?.camera ?: return null
+        val cameraIntrinsics = camera.textureIntrinsics
+        val focalLengthX = cameraIntrinsics.focalLength[0]
+
+        val focalLengthY = cameraIntrinsics.focalLength[1]
+        val imageWidth = cameraIntrinsics.imageDimensions[0]
+        val imageHeight = cameraIntrinsics.imageDimensions[1]
+        val horizontalFov = computeFov(imageWidth, focalLengthX)
+        val verticalFov = computeFov(imageHeight, focalLengthY)
+        return Pair(horizontalFov, verticalFov)
     }
 
     override fun onComplete() {
