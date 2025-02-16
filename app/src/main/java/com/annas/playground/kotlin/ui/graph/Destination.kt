@@ -23,6 +23,7 @@ object Destination {
     const val YOLO_DETECTOR = "yolo-detector-screen"
     const val IMAGE_OBJECT_DETECTION = "image-object-detection-screen"
     const val ARCORE = "arcore-screen"
+    const val SCENE_VIEW = "scene-view-screen"
 }
 
 data class Section(
@@ -41,6 +42,7 @@ data class Section(
             Section(9, "Object Detector", route = Destination.OBJECT_DETECTOR),
             Section(11, "Image Object Detection", route = Destination.IMAGE_OBJECT_DETECTION),
             Section(10, "AR Core", route = Destination.ARCORE),
+            Section(12, "Scene View", route = Destination.SCENE_VIEW),
         )
     }
 }

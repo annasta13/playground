@@ -163,7 +163,11 @@ dependencies {
     //ARCore
     implementation (libs.javagl.obj)
     implementation (libs.material)
-    implementation("com.google.ar.sceneform:core:1.15.0")
+//    implementation ("io.github.sceneview:arsceneview:0.9.7")
+    implementation ("androidx.media3:media3-exoplayer:1.1.1")
+    implementation ("androidx.media3:media3-exoplayer-dash:1.1.1")
+    implementation ("androidx.media3:media3-ui:1.1.1")
+//    implementation("io.github.sceneview:sceneview:2.2.1")
 }
 
 fun readProperties(key: String): String {

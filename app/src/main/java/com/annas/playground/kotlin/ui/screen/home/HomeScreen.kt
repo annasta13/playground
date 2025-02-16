@@ -59,7 +59,6 @@ private fun HomeItemView(item: Section, onNavigate: (String) -> Unit) {
                     context.startActivity(this)
                 }
             }
-
             else -> onNavigate(item.route)
         }
     }) {

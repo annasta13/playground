@@ -1,8 +1,10 @@
 package com.annas.playground.kotlin.ui.screen.arcore
 
 import android.Manifest
-import android.graphics.Color
+import android.graphics.PointF
+import android.net.Uri
 import android.os.Bundle
+import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
@@ -17,6 +19,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.media3.common.MediaItem
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.PlayerView
 import com.annas.playground.R
 import com.annas.playground.databinding.ActivityArCoreBinding
 import com.annas.playground.java.helpers.arcore.CameraPermissionHelper
@@ -31,15 +36,17 @@ import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.ArSceneView
 import com.google.ar.sceneform.FrameTime
 import com.google.ar.sceneform.math.Vector3
+import com.google.ar.sceneform.rendering.Color
 import com.google.ar.sceneform.rendering.MaterialFactory
 import com.google.ar.sceneform.rendering.ShapeFactory
+import com.google.ar.sceneform.rendering.ViewRenderable
 import com.google.ar.sceneform.ux.TransformableNode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.math.atan
 
 
-@Suppress("TooManyFunctions", "unused","ReturnCount","MagicNumber")
+@Suppress("TooManyFunctions", "unused", "ReturnCount", "MagicNumber")
 class ArCoreActivity : AppCompatActivity(), MyArFragment.OnCompleteListener {
     private lateinit var binding: ActivityArCoreBinding
     private lateinit var cameraPermissionLauncher: ActivityResultLauncher<String>
@@ -76,11 +83,11 @@ class ArCoreActivity : AppCompatActivity(), MyArFragment.OnCompleteListener {
         arFragment.arSceneView.scene.addOnUpdateListener { frameTime ->
             val currentTime = System.currentTimeMillis()
 
-           /* if (currentTime - lastDetectionTime > MISS_TOLERANCE) {
-                detectedObject = null
-                lastDetectionTime = currentTime + WARM_UP_TOLERANCE // Set future time to pause detection
-                return@addOnUpdateListener
-            }*/
+            /* if (currentTime - lastDetectionTime > MISS_TOLERANCE) {
+                 detectedObject = null
+                 lastDetectionTime = currentTime + WARM_UP_TOLERANCE // Set future time to pause detection
+                 return@addOnUpdateListener
+             }*/
 
             // If in warm-up period, don't detect yet
             if (currentTime < lastDetectionTime) return@addOnUpdateListener
@@ -88,7 +95,7 @@ class ArCoreActivity : AppCompatActivity(), MyArFragment.OnCompleteListener {
             // Run detection only if 1 second has passed since last detection
             if (currentTime - lastDetectionTime < WARM_UP_TOLERANCE) return@addOnUpdateListener
 
-            detectObject(currentTime, frameTime)
+            if (detectedObject == null) detectObject(currentTime, frameTime)
         }
     }
 
@@ -123,6 +130,7 @@ class ArCoreActivity : AppCompatActivity(), MyArFragment.OnCompleteListener {
 
             override fun onResults(results: List<DetectedObject>) {
                 if (results.isEmpty() && detectedObject == null) return
+                println("check results ${results.firstOrNull()?.detection?.categories?.firstOrNull()}")
                 binding.overlay.clear()
                 detectedObject = results.firstOrNull()
                 if (detectedObject != null) {
@@ -140,6 +148,22 @@ class ArCoreActivity : AppCompatActivity(), MyArFragment.OnCompleteListener {
             listener = listener,
             maxResults = 1
         )
+    }
+
+    fun convertImageToScreen(detectedX: Float, detectedY: Float, obj: DetectedObject): PointF {
+        val imageWidth = obj.tensorImageWidth // Get width from detection model
+        val imageHeight = obj.tensorImageHeight // Get height from detection model
+        val displayMetrics = resources.displayMetrics
+        val screenWidth = displayMetrics.widthPixels
+        val screenHeight = displayMetrics.heightPixels
+
+        val scaleX = screenWidth.toFloat() / imageWidth
+        val scaleY = screenHeight.toFloat() / imageHeight
+
+        val screenX = detectedX * scaleX
+        val screenY = detectedY * scaleY
+
+        return PointF(screenX, screenY)
     }
 
     private fun openCamera() {
@@ -171,62 +195,99 @@ class ArCoreActivity : AppCompatActivity(), MyArFragment.OnCompleteListener {
     fun placeARObjectFromDetection(detectedX: Float, detectedY: Float) {
         val frame = arFragment.arSceneView.arFrame ?: return
         val camera = frame.camera
+        val point = convertImageToScreen(detectedX, detectedY, obj = detectedObject!!)
         val hitResult = frame.hitTest(detectedX, detectedY).firstOrNull()
         if (hitResult != null) {
             detectedObject?.detection?.apply {
                 val anchor = hitResult.createAnchor()
-                placeARObject(anchor)
+                placeSphere(anchor)
+                createVideoNode(anchor)
             }
         } else {
             println("check No AR surface, placing object in front of camera")
+            val obj = detectedObject ?: return
+            val boundingBox = obj.detection.boundingBox
+            val scaleHeight = binding.root.height * 1f / obj.tensorImageHeight.toFloat()
+            val scaleWidth = binding.root.width * 1f / obj.tensorImageWidth.toFloat()
+//            println("check height $height width $width")
+            val top = boundingBox.top * scaleHeight
+            val bottom = boundingBox.bottom * scaleHeight
+            val left = boundingBox.left * scaleWidth
+            val right = boundingBox.right * scaleWidth
             val position = camera.pose.compose(Pose.makeTranslation(0f, 0f, -1f)) // 1m in front
             val anchor = arFragment.arSceneView.session?.createAnchor(position)
-            anchor?.let { placeARObject(it) }
+            anchor?.let {
+                placeSphere(it)
+                createVideoNode(anchor)
+            }
         }
     }
 
-
-    private fun placeARObject(anchor: Anchor) {
-        runOnUiThread {
-            removePlacedObject()
-            placeSphere(anchor)
+    fun createVideoNode(anchor: Anchor) {
+        removePlacedObject()
+        val uri = Uri.parse("android.resource://${packageName}/raw/sample_video")
+        val player = ExoPlayer.Builder(applicationContext).build()
+        val mediaItem = MediaItem.fromUri(uri)
+        player.setMediaItem(mediaItem)
+        val playerView = PlayerView(this)
+        playerView.apply {
+            layoutParams = ViewGroup.LayoutParams(
+                320,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
         }
+        playerView.rotation = -90f
+        playerView.player = player
+        player.prepare()
+        player.play()
+        //https://stackoverflow.com/questions/51495481/viewrenderable-not-working-arcore
+        ViewRenderable.builder().setView(this, playerView)
+            .build()
+            .thenAccept { viewRenderable: ViewRenderable ->
+                val anchorNode = AnchorNode(anchor)
+                anchorNode.setParent(arFragment.arSceneView.scene)
+                anchorNode.renderable = viewRenderable
+                placedAnchorNode = anchorNode
+            }
     }
 
     private fun placeSphere(anchor: Anchor) {
-        MaterialFactory.makeOpaqueWithColor(
-            this@ArCoreActivity,
-            com.google.ar.sceneform.rendering.Color(Color.GREEN)
-        )
-            .thenAccept { material ->
-                val arrowhead = ShapeFactory.makeSphere(
-                    0.05f,
-                    Vector3.zero(),   // Arrowhead height
-                    MaterialFactory.makeOpaqueWithColor(
-                        this@ArCoreActivity, com.google.ar.sceneform.rendering.Color(Color.RED)
-                    ).get()
-                )
-                val anchorNode = AnchorNode(anchor)
-                anchorNode.setParent(arFragment.arSceneView.scene)
+        runOnUiThread {
+            removePlacedObject()
+            MaterialFactory.makeOpaqueWithColor(
+                this@ArCoreActivity,
+                Color(android.graphics.Color.GREEN)
+            )
+                .thenAccept { material ->
+                    val arrowhead = ShapeFactory.makeSphere(
+                        0.05f,
+                        Vector3.zero(),   // Arrowhead height
+                        MaterialFactory.makeOpaqueWithColor(
+                            this@ArCoreActivity, Color(android.graphics.Color.RED)
+                        ).get()
+                    )
+                    val anchorNode = AnchorNode(anchor)
+                    anchorNode.setParent(arFragment.arSceneView.scene)
 
-                val transformableNode = TransformableNode(arFragment.transformationSystem)
-                transformableNode.setParent(anchorNode)
-                transformableNode.renderable = arrowhead
-                transformableNode.select()
-                placedAnchorNode = anchorNode
-            }
+                    val transformableNode = TransformableNode(arFragment.transformationSystem)
+                    transformableNode.setParent(anchorNode)
+                    transformableNode.renderable = arrowhead
+                    transformableNode.select()
+                    placedAnchorNode = anchorNode
+                }
+        }
     }
 
     private fun placeCube(anchor: Anchor) {
         MaterialFactory.makeOpaqueWithColor(
             this@ArCoreActivity,
-            com.google.ar.sceneform.rendering.Color(Color.BLUE)
+            Color(android.graphics.Color.BLUE)
         )
             .thenAccept { material ->
                 val cubeRenderable = ShapeFactory.makeCube(
                     Vector3(
-                      0.1f,
-                      0.1f,
+                        0.1f,
+                        0.1f,
                         0.1f
                     ), // Width, height, and depth
                     Vector3(0f, 0f, 0f), // Center of the cube

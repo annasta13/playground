@@ -28,6 +28,7 @@ import com.annas.playground.kotlin.ui.screen.objectdetector.ObjectDetectorScreen
 import com.annas.playground.kotlin.helper.tensorflow.ObjectDetectorType
 import com.annas.playground.kotlin.ui.screen.arcore.ArcoreScreen
 import com.annas.playground.kotlin.ui.screen.objectdetector.imageobject.ImageObjectDetectorView
+import com.annas.playground.kotlin.ui.screen.objectdetector.sceneview.SceneViewScreen
 import com.annas.playground.kotlin.ui.screen.objectdetector.tensorflow.TensorflowDetectorScreen
 import com.annas.playground.kotlin.ui.screen.objectdetector.yolo.YoloDetectorScreen
 import com.annas.playground.kotlin.ui.screen.search.SearchScreen
@@ -142,6 +143,10 @@ fun NavGraph() {
         }
         registerScreen(route = Destination.ARCORE){
             ArcoreScreen(action.navigateUp)
+        }
+
+        registerScreen(route = Destination.SCENE_VIEW){
+            SceneViewScreen()
         }
     }
 }
