@@ -125,10 +125,7 @@ class TensorflowDetectorHelper(
         val difference = currentTimestamp - (previousInferenceTime ?: 0L)
         val shouldDetect = difference > DETECTION_INTERVAL || previousInferenceTime == 0L
 
-        if (shouldDetect.not()) {
-            imageProxy.close()
-            return
-        }
+        if (shouldDetect.not()) return
 
         if (!::bitmapBuffer.isInitialized) {
             bitmapBuffer = Bitmap.createBitmap(

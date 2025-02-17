@@ -24,6 +24,7 @@ object Destination {
     const val IMAGE_OBJECT_DETECTION = "image-object-detection-screen"
     const val ARCORE = "arcore-screen"
     const val SCENE_VIEW = "scene-view-screen"
+    const val MLKIT_DETECTOR = "mlkit-detector-screen"
 }
 
 data class Section(
@@ -43,6 +44,7 @@ data class Section(
             Section(11, "Image Object Detection", route = Destination.IMAGE_OBJECT_DETECTION),
             Section(10, "AR Core", route = Destination.ARCORE),
             Section(12, "Scene View", route = Destination.SCENE_VIEW),
+            Section(12, "MLKit Detector", route = Destination.MLKIT_DETECTOR),
         )
     }
 }

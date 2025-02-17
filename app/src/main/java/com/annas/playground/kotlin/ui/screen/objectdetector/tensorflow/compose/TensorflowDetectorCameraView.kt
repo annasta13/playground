@@ -58,7 +58,8 @@ fun TensorflowDetectorCameraView(type: Int) {
         TensorflowDetectorHelper(
             currentModel = type,
             context = context,
-            listener = listener
+            listener = listener,
+            maxResults = 1
         )
     }
 
@@ -91,7 +92,11 @@ fun TensorflowDetectorCameraView(type: Int) {
                             .build()
                             .also {
                                 it.setAnalyzer(ContextCompat.getMainExecutor(context)) { image ->
-                                    objectDetector.detect(image)
+                                    objectDetector.detect(
+                                        image,
+                                        previousInferenceTime = detectedObjects.firstOrNull()?.inferenceTime
+                                    )
+                                    image.close()
                                 }
                             }
                         cameraProvider.unbindAll()

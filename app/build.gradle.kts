@@ -103,7 +103,6 @@ dependencies {
     implementation(libs.play.services.mlkit.text.recognition.common)
     implementation(libs.play.services.mlkit.text.recognition)
     implementation(libs.androidx.coordinatorlayout)
-    implementation(libs.sceneform.ux)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
@@ -154,20 +153,21 @@ dependencies {
     implementation(libs.tensorflow.lite.task.vision)
     implementation(libs.tensorflow.lite.api)
     implementation(libs.tensorflow.lite.support)
+//    implementation(libs.sceneform.ux)
 
     //yolov9
     implementation(libs.tensorflow.lite.gpu.delegate.plugin)
     implementation(libs.tensorflow.lite.gpu.api)
-    implementation(libs.arcore)
+//    implementation(libs.arcore)
 
     //ARCore
-    implementation (libs.javagl.obj)
+//    implementation (libs.javagl.obj)
     implementation (libs.material)
-//    implementation ("io.github.sceneview:arsceneview:0.9.7")
     implementation ("androidx.media3:media3-exoplayer:1.1.1")
     implementation ("androidx.media3:media3-exoplayer-dash:1.1.1")
     implementation ("androidx.media3:media3-ui:1.1.1")
-//    implementation("io.github.sceneview:sceneview:2.2.1")
+    implementation("io.github.sceneview:sceneview:2.2.1")
+    implementation ("com.google.mlkit:object-detection:17.0.2")
 }
 
 fun readProperties(key: String): String {

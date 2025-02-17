@@ -13,6 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.annas.playground.kotlin.helper.tensorflow.ObjectDetectorType
 import com.annas.playground.kotlin.ui.screen.apifetching.user.create.CreateUserScreen
 import com.annas.playground.kotlin.ui.screen.apifetching.user.read.UserListScreen
 import com.annas.playground.kotlin.ui.screen.dataprocessing.createtransaction.CreateTransactionScreen
@@ -25,9 +26,8 @@ import com.annas.playground.kotlin.ui.screen.home.HomeScreen
 import com.annas.playground.kotlin.ui.screen.jumpinggame.JumpingGameScreen
 import com.annas.playground.kotlin.ui.screen.loadinganimation.LoadingAnimationScreen
 import com.annas.playground.kotlin.ui.screen.objectdetector.ObjectDetectorScreen
-import com.annas.playground.kotlin.helper.tensorflow.ObjectDetectorType
-import com.annas.playground.kotlin.ui.screen.arcore.ArcoreScreen
 import com.annas.playground.kotlin.ui.screen.objectdetector.imageobject.ImageObjectDetectorView
+import com.annas.playground.kotlin.ui.screen.objectdetector.mlkit.MLKitDetectorScreen
 import com.annas.playground.kotlin.ui.screen.objectdetector.sceneview.SceneViewScreen
 import com.annas.playground.kotlin.ui.screen.objectdetector.tensorflow.TensorflowDetectorScreen
 import com.annas.playground.kotlin.ui.screen.objectdetector.yolo.YoloDetectorScreen
@@ -141,12 +141,13 @@ fun NavGraph() {
         registerScreen(route = Destination.IMAGE_OBJECT_DETECTION){
             ImageObjectDetectorView()
         }
-        registerScreen(route = Destination.ARCORE){
-            ArcoreScreen(action.navigateUp)
-        }
 
         registerScreen(route = Destination.SCENE_VIEW){
             SceneViewScreen()
+        }
+
+        registerScreen(route = Destination.MLKIT_DETECTOR){
+            MLKitDetectorScreen(onNavigateBack = action.navigateUp)
         }
     }
 }

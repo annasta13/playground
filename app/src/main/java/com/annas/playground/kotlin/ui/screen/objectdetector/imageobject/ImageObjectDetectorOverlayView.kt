@@ -65,8 +65,6 @@ fun ImageObjectDetectorOverlayView(
                 top + 50f,
                 textPaint,
             )
-
-
         }
     }
 }

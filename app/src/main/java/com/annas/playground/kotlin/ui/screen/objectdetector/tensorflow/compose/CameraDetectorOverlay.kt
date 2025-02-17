@@ -71,8 +71,6 @@ fun CameraDetectorOverlay(
                     top + 50f,
                     textPaint,
                 )
-
-
             }
         }
     }

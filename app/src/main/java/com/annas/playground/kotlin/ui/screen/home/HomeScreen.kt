@@ -1,6 +1,5 @@
 package com.annas.playground.kotlin.ui.screen.home
 
-import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,9 +22,7 @@ import com.annas.playground.R
 import com.annas.playground.kotlin.ui.components.BodyText
 import com.annas.playground.kotlin.ui.components.ScreenContainer
 import com.annas.playground.kotlin.ui.components.ThemePreviewParameterProvider
-import com.annas.playground.kotlin.ui.graph.Destination
 import com.annas.playground.kotlin.ui.graph.Section
-import com.annas.playground.kotlin.ui.screen.arcore.ArCoreActivity
 import com.annas.playground.kotlin.ui.theme.LargePadding
 import com.annas.playground.kotlin.ui.theme.MediumPadding
 import com.annas.playground.kotlin.ui.theme.PlaygroundTheme
@@ -53,14 +50,15 @@ fun HomeScreen(onNavigate: (String) -> Unit) {
 private fun HomeItemView(item: Section, onNavigate: (String) -> Unit) {
     val context = LocalContext.current
     Card(modifier = Modifier.clickable {
-        when (item.route) {
+        /*when (item.route) {
             Destination.ARCORE -> {
                 Intent(context, ArCoreActivity::class.java).apply {
                     context.startActivity(this)
                 }
             }
             else -> onNavigate(item.route)
-        }
+        }*/
+            onNavigate(item.route)
     }) {
         Row(
             modifier = Modifier
