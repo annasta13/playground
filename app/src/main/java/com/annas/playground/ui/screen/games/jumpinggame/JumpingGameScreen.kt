@@ -1,4 +1,4 @@
-package com.annas.playground.ui.screen.jumpinggame
+package com.annas.playground.ui.screen.games.jumpinggame
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -46,18 +46,18 @@ import com.annas.playground.ui.components.HeadingText
 import com.annas.playground.ui.components.ScreenContainer
 import com.annas.playground.ui.components.animateHorizontalAlignmentAsState
 import com.annas.playground.ui.components.animateVerticalAlignmentAsState
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.CONSTRAINT_MOTION_DELAY
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.CONSTRAINT_SPEED_DELAY
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.DEFAULT_CONSTRAINT_POSITION
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.DEFAULT_VERTICAL_BIAS
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.FALL_DELAY
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.HIDING_DELAY
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.HORIZONTAL_BIAS_INTERVAL
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.JUMP_DELAY
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.MAX_SPEED_DELAY
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.MIN_SPEED_DELAY
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.TARGET_VERTICAL_BIAS
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.VERTICAL_BIAS_INTERVAL
+import com.annas.playground.ui.screen.games.jumpinggame.JumpingGameConstants.CONSTRAINT_MOTION_DELAY
+import com.annas.playground.ui.screen.games.jumpinggame.JumpingGameConstants.CONSTRAINT_SPEED_DELAY
+import com.annas.playground.ui.screen.games.jumpinggame.JumpingGameConstants.DEFAULT_CONSTRAINT_POSITION
+import com.annas.playground.ui.screen.games.jumpinggame.JumpingGameConstants.DEFAULT_VERTICAL_BIAS
+import com.annas.playground.ui.screen.games.jumpinggame.JumpingGameConstants.FALL_DELAY
+import com.annas.playground.ui.screen.games.jumpinggame.JumpingGameConstants.HIDING_DELAY
+import com.annas.playground.ui.screen.games.jumpinggame.JumpingGameConstants.HORIZONTAL_BIAS_INTERVAL
+import com.annas.playground.ui.screen.games.jumpinggame.JumpingGameConstants.JUMP_DELAY
+import com.annas.playground.ui.screen.games.jumpinggame.JumpingGameConstants.MAX_SPEED_DELAY
+import com.annas.playground.ui.screen.games.jumpinggame.JumpingGameConstants.MIN_SPEED_DELAY
+import com.annas.playground.ui.screen.games.jumpinggame.JumpingGameConstants.TARGET_VERTICAL_BIAS
+import com.annas.playground.ui.screen.games.jumpinggame.JumpingGameConstants.VERTICAL_BIAS_INTERVAL
 import com.annas.playground.ui.theme.LargePadding
 import com.annas.playground.ui.theme.SmallPadding
 import kotlinx.coroutines.delay

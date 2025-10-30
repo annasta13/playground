@@ -13,19 +13,21 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.annas.playground.helper.ObjectDetectorType
 import com.annas.playground.ui.screen.apifetching.user.create.CreateUserScreen
 import com.annas.playground.ui.screen.apifetching.user.read.UserListScreen
 import com.annas.playground.ui.screen.dataprocessing.createtransaction.CreateTransactionScreen
 import com.annas.playground.ui.screen.dataprocessing.productdetail.ProductDetailScreen
 import com.annas.playground.ui.screen.dataprocessing.productlist.ProductListScreen
 import com.annas.playground.ui.screen.documentScanner.DocumentScannerScreen
+import com.annas.playground.ui.screen.games.GameHomeScreen
+import com.annas.playground.ui.screen.games.choreographer.game.HarvestCartScreen
+import com.annas.playground.ui.screen.games.jumpinggame.JumpingGameScreen
 import com.annas.playground.ui.screen.generator.GeneratorResultScreen
 import com.annas.playground.ui.screen.heartbeat.AnimationScreen
 import com.annas.playground.ui.screen.home.HomeScreen
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameScreen
 import com.annas.playground.ui.screen.loadinganimation.LoadingAnimationScreen
 import com.annas.playground.ui.screen.objectdetector.ObjectDetectorScreen
-import com.annas.playground.helper.ObjectDetectorType
 import com.annas.playground.ui.screen.objectdetector.tensorflow.TensorflowDetectorScreen
 import com.annas.playground.ui.screen.objectdetector.yolo.YoloDetectorScreen
 import com.annas.playground.ui.screen.search.SearchScreen
@@ -116,6 +118,14 @@ fun NavGraph() {
 
         registerScreen(route = Destination.JUMPING_GAME) {
             JumpingGameScreen()
+        }
+
+        registerScreen(route = Destination.GAMES) {
+            GameHomeScreen(onNavigate = action.navigate, onNavigateUp = action.navigateUp)
+        }
+
+        registerScreen(route = Destination.FRUIT_CART_GAME) {
+            HarvestCartScreen(onNavigateUp = action.navigateUp)
         }
 
         registerScreen(route = Destination.SCAN_IMAGE_TEXT) {

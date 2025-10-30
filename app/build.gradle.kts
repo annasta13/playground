@@ -15,12 +15,12 @@ plugins {
 
 android {
     namespace = "com.annas.playground"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.annas.playground"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -103,6 +103,7 @@ dependencies {
     implementation(libs.play.services.mlkit.text.recognition.common)
     implementation(libs.play.services.mlkit.text.recognition)
     implementation(libs.androidx.coordinatorlayout)
+    implementation(libs.androidx.lifecycle.runtime.compose.android)
 
 
     testImplementation(libs.junit)
@@ -156,6 +157,8 @@ dependencies {
     //yolov9
     implementation(libs.tensorflow.lite.gpu.delegate.plugin)
     implementation(libs.tensorflow.lite.gpu.api)
+    implementation(libs.androidx.material.icons.core)
+    implementation(libs.androidx.material.icons.extended)
 
 }
 

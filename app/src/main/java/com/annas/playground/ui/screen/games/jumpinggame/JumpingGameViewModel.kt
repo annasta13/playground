@@ -1,4 +1,4 @@
-package com.annas.playground.ui.screen.jumpinggame
+package com.annas.playground.ui.screen.games.jumpinggame
 
 import androidx.compose.runtime.mutableIntStateOf
 import com.annas.playground.helper.PreferenceHelper

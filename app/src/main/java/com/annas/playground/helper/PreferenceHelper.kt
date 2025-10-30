@@ -1,9 +1,17 @@
 package com.annas.playground.helper
 
 import android.content.Context
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.annas.playground.utils.Constants
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
+import androidx.core.content.edit
 
 @Suppress("unused")
 class PreferenceHelper(context: Context) {
@@ -20,11 +28,11 @@ class PreferenceHelper(context: Context) {
     )
 
     fun saveString(key: String, value: String) {
-        preference.edit().putString(key, value).apply()
-        encryptedPreference.edit().putString(key, value).apply()
+        preference.edit { putString(key, value) }
+        encryptedPreference.edit { putString(key, value) }
     }
     fun saveEncryptedString(key: String, value: String) {
-        encryptedPreference.edit().putString(key, value).apply()
+        encryptedPreference.edit { putString(key, value) }
     }
 
     fun getEncryptedString(key: String): String? {
@@ -32,7 +40,7 @@ class PreferenceHelper(context: Context) {
     }
 
     fun saveInt(key: String, value: Int) {
-        preference.edit().putInt(key, value).apply()
+        preference.edit { putInt(key, value) }
     }
 
     fun getInt(key: String): Int {
@@ -44,7 +52,30 @@ class PreferenceHelper(context: Context) {
     }
 
     fun clear() {
-        preference.edit().clear().apply()
-        encryptedPreference.edit().clear().apply()
+        preference.edit { clear() }
+        encryptedPreference.edit { clear() }
     }
+}
+
+@EntryPoint
+@InstallIn(SingletonComponent::class)
+interface PreferenceHelperInitializer {
+    val preference: PreferenceHelper
+}
+
+@Composable
+fun rememberPreferenceHelper(): PreferenceHelper {
+    // Get the current Android Context from the composition.
+    val context = LocalContext.current
+    // Remember the PreferenceHelper instance.
+    // It will be created only once for the given context and reused across recompositions.
+    val state by remember {
+        lazy {
+            EntryPointAccessors.fromApplication(
+                context,
+                PreferenceHelperInitializer::class.java
+            ).preference
+        }
+    }
+    return state
 }

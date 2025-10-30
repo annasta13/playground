@@ -1,6 +1,6 @@
 [versions]
 accompanistSwiperefresh = "0.19.0"
-agp = "8.4.1"
+agp = "8.6.0"
 buildTools = "7.2.1"
 appcompat = "1.7.0"
 converterMoshi = "2.9.0"
@@ -15,7 +15,7 @@ kotlinGradlePlugin = "2.0.0"
 landscapistGlide = "2.3.6"
 lifecycleRuntimeKtx = "2.8.3"
 activityCompose = "1.9.0"
-composeBom = "2024.06.00"
+composeBom = "2025.10.01"
 ksp = "2.0.0-1.0.21"
 hilt = "2.51.1"
 hiltAndroidX = "1.2.0"
@@ -55,12 +55,15 @@ tensorflowLiteMetadata = "0.1.0"
 tensorflowLiteApi = "2.9.0"
 coordinatorlayout = "1.2.0"
 litertApi = "1.0.1"
+lifecycleRuntimeComposeAndroid = "2.9.4"
 
 [libraries]
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwiperefresh" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-material-icons-core = { module = "androidx.compose.material:material-icons-core" }
+androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "workRuntime" }
 converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterMoshi" }
 hamcrest-library = { module = "org.hamcrest:hamcrest-library", version.ref = "hamcrestLibrary" }
@@ -134,6 +137,7 @@ play-services-mlkit-text-recognition-common = { group = "com.google.android.gms"
 play-services-mlkit-text-recognition = { group = "com.google.android.gms", name = "play-services-mlkit-text-recognition", version.ref = "playServicesMlkitTextRecognition" }
 androidx-coordinatorlayout = { group = "androidx.coordinatorlayout", name = "coordinatorlayout", version.ref = "coordinatorlayout" }
 litert-api = { group = "com.google.ai.edge.litert", name = "litert-api", version.ref = "litertApi" }
+androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-android", version.ref = "lifecycleRuntimeComposeAndroid" }
 
 
 [plugins]

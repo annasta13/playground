@@ -1,4 +1,4 @@
-package com.annas.playground.ui.screen.jumpinggame
+package com.annas.playground.ui.screen.games.jumpinggame
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,7 +17,7 @@ import com.annas.playground.R
 import com.annas.playground.ui.components.BodyText
 import com.annas.playground.ui.components.HeadingText
 import com.annas.playground.ui.components.PrimaryButton
-import com.annas.playground.ui.screen.jumpinggame.JumpingGameConstants.GAME_OVER_BUTTON_FRACTION
+import com.annas.playground.ui.screen.games.jumpinggame.JumpingGameConstants.GAME_OVER_BUTTON_FRACTION
 import com.annas.playground.ui.theme.MediumPadding
 
 
@@ -32,7 +32,7 @@ fun GameOverView(score: Int, highestScore: Int, onClick: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                HeadingText(text = "Game Over", color = Color.White)
+                HeadingText(text = stringResource(R.string.game_over), color = Color.White)
                 HeadingText(
                     text = stringResource(R.string.score, score),
                     fontWeight = FontWeight.Bold,
